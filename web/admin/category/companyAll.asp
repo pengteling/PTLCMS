@@ -1,37 +1,20 @@
-<!--#include virtual="/inc/inc.asp" -->
-<!DOCTYPE html>
-<html lang="en">
+<!--#include virtual="/admin/inc/head.asp"-->
+<!--#include virtual="/admin/inc/privilege.asp"-->
+<%
+if groupid=2 then
+	'sql_sonid_page = "0"
+	sql_sonid_page=""
+else
+	rs.open "select sonid_page from zh_adminGroup where id="&groupid
+	if not rs.eof then
+		my_sonid_page =rs(0)
+		if my_sonid_page="" then my_sonid_page="0"
+		sql_sonid_page=" and cateid in ("&my_sonid_page&")"
+	end if
+	rs.close
+end if
+%>
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
 <%
 dim id,act
 set rs=server.createobject("adodb.recordset")
@@ -86,20 +69,20 @@ If Act="del" Then
 End IF
 If Act="IsHide" Then
 	s=strToNum(request("s"))
-	Conn.Execute("Update category Set IsHome="&s&" Where cateID="&ID&"")
+	Easp.Db.query("Update category Set IsHome="&s&" Where cateID="&ID&"")
 	Response.Redirect("companyAll.asp")
 	Response.End()
 End If
 If Act="IsOut" Then
-	Conn.Execute("Update category Set IsOutLink=0 Where cateID="&ID&"")
+	Easp.Db.query("Update category Set IsOutLink=0 Where cateID="&ID&"")
 	Response.Redirect("companyAll.asp")
 	Response.End()
 End If
 If Act="IsPage" Then
 	p=strToNum(request("p"))
 	If p=0 Then p=ID
-	Conn.Execute("Update category Set IsIndex=0 Where cateID="&p&" Or followid="&p&"")
-	Conn.Execute("Update category Set IsIndex=1 Where cateID="&ID&"")
+	Easp.Db.query("Update category Set IsIndex=0 Where cateID="&p&" Or followid="&p&"")
+	Easp.Db.query("Update category Set IsIndex=1 Where cateID="&ID&"")
 	set Rs=server.createobject("adodb.recordset")
 	Response.Redirect("companyAll.asp")
 	Response.End()
@@ -336,17 +319,10 @@ End If
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
+                        <%
+
+                        %>
+
                         <li>
                             <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>

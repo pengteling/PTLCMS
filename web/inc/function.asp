@@ -170,4 +170,44 @@ End Function
 		str = Replace(str, "'", "''")
 		JAPUncode = str
 	End Function
+
+
+
+	function wrongMsg(str)
+	response.write str &"<a href=""javascript:history.back();"">返回</a>"
+	response.End()
+end function
+
+Function GetLocationURL() 
+Dim Url 
+Dim ServerPort,ServerName,ScriptName,QueryString 
+ServerName = Request.ServerVariables("SERVER_NAME") 
+ServerPort = Request.ServerVariables("SERVER_PORT") 
+ScriptName = Request.ServerVariables("SCRIPT_NAME") 
+'QueryString = Request.ServerVariables("QUERY_STRING") 
+Url="http://"&ServerName 
+If ServerPort <> "80" Then Url = Url & ":" & ServerPort 
+Url=Url&ScriptName 
+If QueryString <>"" Then Url=Url&"?"& QueryString 
+GetLocationURL=Url 
+End Function 
+
+Function LeftStr(StrValue,NumValue)
+ Dim nStr,a,i
+ for i=1 to Len(StrValue)
+  a=Mid(StrValue,i,1)
+  if Asc(a)<0 then
+   nStr=nStr+2
+  else
+   nStr=nStr+1
+  end if
+  LeftStr=LeftStr&a
+
+  if nStr>=CInt(NumValue) then
+  if LeftStr<>StrValue then LeftStr=LeftStr&"…"
+   Exit Function
+   end if
+ next
+   
+End Function
 %>

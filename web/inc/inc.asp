@@ -3,3 +3,4 @@
 <!--#include virtual="/inc/webconfig.asp"-->
 <!--#include virtual="/settings/config.asp"-->
 <!--#include virtual="/inc/function.asp"-->
+<!--#include virtual="/inc/const.asp"-->
