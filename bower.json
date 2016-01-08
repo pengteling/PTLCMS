@@ -1,0 +1,25 @@
+{
+  "name": "ptlCMS",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "https://github.com/pengteling/ptlCMS",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "authors": [
+    "pengteling <33460202@qq.com>"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "~3.3.6",
+    "bootstrap": "~3.3.6",
+    "jquery": "~2.1.4",
+    "metisMenu": "git://github.com/onokumus/metisMenu#~2.2.0"
+  }
+}
