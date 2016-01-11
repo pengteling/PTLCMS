@@ -1,4 +1,6 @@
 <!--#include virtual="/inc/inc.asp" -->
+<!--#include virtual="/admin/admin.asp" -->
+<!--#include virtual="/admin/inc/privilege.asp" -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,3 +34,4 @@
     <![endif]-->
 
 </head>
+<iframe src="/admin/keepsession.asp" frameborder="0" width="0" height="0"></iframe>

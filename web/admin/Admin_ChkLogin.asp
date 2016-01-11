@@ -46,7 +46,24 @@ if FoundErr<>True then
 	Set rs = Easp.Db.Sel("Select * From zh_admin where username = {username} and password={password} ")
 
 	if not rs.eof then
-		response.cookies("login")="1"
+		'response.cookies("login")="1"
+		RndPassword=GetRndPassword(16)
+		Set LoginRs=server.CreateObject("adodb.recordset")
+		sql="select * from zh_Admin where id="&rs("id")
+		LoginRs.open sql,conn,1,3		
+			LoginRs("LastLoginIP")=Request.ServerVariables("REMOTE_ADDR")
+			LoginRs("LastLoginTime")=now()
+			LoginRs("LoginTimes")=LoginRs("LoginTimes")+1
+			LoginRs("RndPassword")=RndPassword
+			
+			LoginRs.update
+			session.Timeout=SessionTimeout
+			session("AdminID")=LoginRs("id")
+			session("AdminName")=LoginRs("username")
+			session("AdminPassword")=LoginRs("Password")		
+			session("RndPassword")=RndPassword
+			LoginRs.close
+			set LoginRs=nothing
 		Response.Redirect "index.asp"
 		
 	else

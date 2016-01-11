@@ -1,5 +1,5 @@
 <!--#include virtual="/admin/inc/head.asp"-->
-<!--#include virtual="/admin/inc/privilege.asp"-->
+
 <%
 if groupid=2 then
 	'sql_sonid_page = "0"
@@ -321,10 +321,42 @@ End If
                     <ul class="nav" id="side-menu">
                         <%
 
+set rs2=server.CreateObject("adodb.recordset")
+rs.open "Select * from catepage_c where depth=1 "&sql_sonid_page&"  order by orderid",conn,1,1
+while not rs.eof
+%> 
+
+<li>
+                            <a href="#"><i class="fa fa-list fa-fw"></i> <%=rs("catename")%><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                
+                                <%
+ ' response.write "Select * from catepage where depth=2 "&sql_sonid_page&" and followid="& rs("cateid")&" order by orderid"
+rs2.open "Select * from catepage_c where depth=2 "&sql_sonid_page&" and followid="& rs("cateid")&"  order by orderid",conn,1,1
+while not rs2.eof
+
+%>
+ <li> <a href="/admin/<%=rs2("outlinkurl")%>"><%=rs2("catename")%></a></li>
+<%
+rs2.movenext
+wend
+rs2.close  
+  
+  
+
                         %>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+
+  <%
+  rs.movenext
+  wend
+  rs.close  %>
 
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="index.html"><i class="fa fa-list fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -437,14 +469,13 @@ End If
                             <div class="table-responsive">
                                 
 <table class="table table-hover">
-                                    <thead>
+<thead>
   <tr>
     <th>栏目名</th>
     <th>属性</th>
-    <th>相关操作</th>
-    
+    <th>相关操作</th>    
   </tr>
-  </thead>
+</thead>
   <tbody>
 <%
 

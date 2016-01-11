@@ -1,4 +1,29 @@
 <%
+'函数名：GetRndPassword
+'作  用：获取系统随机密码
+'返回值：GetRndPassword -----值
+'================================================
+Function GetRndPassword(PasswordLen)
+	Dim Ran,i,strPassword
+	strPassword=""
+	For i=1 To PasswordLen
+		Randomize
+		Ran = CInt(Rnd * 2)
+		Randomize
+		If Ran = 0 Then
+			Ran = CInt(Rnd * 25) + 97
+			strPassword =strPassword & UCase(Chr(Ran))
+		ElseIf Ran = 1 Then
+			Ran = CInt(Rnd * 9)
+			strPassword = strPassword & Ran
+		ElseIf Ran = 2 Then
+			Ran = CInt(Rnd * 25) + 97
+			strPassword =strPassword & Chr(Ran)
+		End If
+	Next
+	GetRndPassword=strPassword
+End Function
+
 '****************************************************
 '过程名：WriteErrMsg
 '作  用：显示错误提示信息
@@ -209,5 +234,132 @@ Function LeftStr(StrValue,NumValue)
    end if
  next
    
+End Function
+
+
+'=============================================================
+'过滤SQL非法字符部分
+'说明: 将字符串中的一些字符去掉后,输出剩余字符串
+'作用: 作为写入数据的规范
+'示例: XXX = CheckSQL(Str)
+'=============================================================
+Public Function CheckSQL(CheckStr)
+	CheckStr = Trim(CheckStr)
+	If IsNull(CheckStr) Or CheckStr = "" Then CheckSQL = "" : Exit Function
+	CheckStr = Replace(CheckStr, "%",		vbNullString)
+	CheckStr = Replace(CheckStr, "@",		vbNullString)
+	CheckStr = Replace(CheckStr, "!",		vbNullString)
+	CheckStr = Replace(CheckStr, "^",		vbNullString)
+	CheckStr = Replace(CheckStr, "=",		vbNullString)
+	CheckStr = Replace(CheckStr, "--",		vbNullString)
+	CheckStr = Replace(CheckStr, "$",		vbNullString)
+	CheckStr = Replace(CheckStr, "'",		vbNullString)
+	CheckStr = Replace(CheckStr, ";",		vbNullString)
+	CheckStr = Replace(CheckStr, Chr(0),	vbNullString)
+	CheckStr = Replace(CheckStr, Chr(34),	vbNullString)
+	CheckSQL = CheckStr
+End Function
+
+'********************************************
+'函数名：IsValidEmail
+'作  用：检查Email地址合法性
+'参  数：email ----要检查的Email地址
+'返回值：True  ----Email地址合法
+'       False ----Email地址不合法
+'********************************************
+
+Function IsValidEmail(email)
+	dim names, name, i, c
+	IsValidEmail = true
+	names = Split(email, "@")
+	if UBound(names) <> 1 then
+	   IsValidEmail = false
+	   exit function
+	end if
+	for each name in names
+		if Len(name) <= 0 then
+			IsValidEmail = false
+    		exit function
+		end if
+		for i = 1 to Len(name)
+		    c = Lcase(Mid(name, i, 1))
+			if InStr("abcdefghijklmnopqrstuvwxyz_-.", c) <= 0 and not IsNumeric(c) then
+		       IsValidEmail = false
+		       exit function
+		     end if
+	   next
+	   if Left(name, 1) = "." or Right(name, 1) = "." then
+    	  IsValidEmail = false
+	      exit function
+	   end if
+	next
+	if InStr(names(1), ".") <= 0 then
+		IsValidEmail = false
+	   exit function
+	end if
+	i = Len(names(1)) - InStrRev(names(1), ".")
+	if i <> 2 and i <> 3 then
+	   IsValidEmail = false
+	   exit function
+	end if
+	if InStr(email, "..") > 0 then
+	   IsValidEmail = false
+	end if
+End Function
+
+'***************************************************
+'函数名：IsObjInstalled
+'作  用：检查组件是否已经安装
+'参  数：strClassString ----组件名
+'返回值：True  ----已经安装
+'       False ----没有安装
+'***************************************************
+Function IsObjInstalled(strClassString)
+	on error resume next
+	IsObjInstalled = False
+	Err = 0
+	Dim xTestObj
+	Set xTestObj = Server.CreateObject(strClassString)
+	If 0 = Err Then IsObjInstalled = True
+	Set xTestObj = Nothing
+	Err = 0
+End Function
+
+'****************************************************
+'函数名：SendMail
+'作  用：用Jmail组件发送邮件
+'参  数：ServerAddress  ----服务器地址
+'        AddRecipient  ----收信人地址
+'        Subject       ----主题
+'        Body          ----信件内容
+'        Sender        ----发信人地址
+'****************************************************
+Function SendMail(MailServerAddress,AddRecipient,Subject,Body,Sender,MailFrom)
+	'on error resume next
+	Dim JMail
+	Set JMail=Server.CreateObject("JMail.SMTPMail")
+	if err then
+		SendMail= "<br><li>没有安装JMail组件</li>"
+		err.clear
+		exit function
+	end if
+	JMail.Logging=True
+	JMail.Charset="utf-8"
+	JMail.ContentType = "text/html"
+	JMail.ServerAddress=MailServerAddress
+	JMail.AddRecipient=AddRecipient
+	JMail.Subject=Subject
+	JMail.Body=MailBody
+	JMail.Sender=Sender
+	JMail.From = MailFrom
+	JMail.Priority=1
+	JMail.Execute 
+	Set JMail=nothing 
+	if err then 
+		SendMail=err.description
+		err.clear
+	else
+		SendMail="OK"
+	end if
 End Function
 %>
