@@ -1,4 +1,4 @@
-<!--#include file="../FiveInc/conn.asp"-->
+<!--#include file="../inc/conn.asp"-->
 <!--#include file="admin.asp"-->
 <!-- #include file="Inc/Head.asp" -->
 <%
@@ -141,7 +141,7 @@ sub ShowConfig()
     <tr> 
       <td class="tr_southidc"><strong>微信二维码：</strong></td>
       <td class="tr_southidc"> <input name="wxurl" type="text" id="wxurl" value="<%=wxurl%>" size="40" maxlength="255">
-      <input name="Submit222" type="button" value="上传图片"  onClick="window.open('../../FiveInc/mx_upload_flash.asp?formname=myform&editname=wxurl&uppath=image&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+      <input name="Submit222" type="button" value="上传图片"  onClick="window.open('../../inc/mx_upload_flash.asp?formname=myform&editname=wxurl&uppath=image&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
       </td>
     </tr>
   <tr> 
@@ -233,7 +233,7 @@ dim objStream
      .Charset   = "utf-8"' //编码，这里你可以改成任何编码   
      .Position   = objStream.Size   
      .WriteText = content' //模版+数据 写入内容   
-     .SaveToFile Server.mappath("../FiveInc/config.asp"),2' //生成文件路径   
+     .SaveToFile Server.mappath("../inc/config.asp"),2' //生成文件路径   
      .Close   
      End With   
    Set objStream = Nothing  

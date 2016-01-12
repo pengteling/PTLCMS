@@ -1,6 +1,6 @@
-<!--#include file="../../FiveInc/conn.asp"-->
+<!--#include file="../../inc/conn.asp"-->
 <!--#include file="../admin.asp"-->
-<!--#include file="../../FiveInc/md5.asp"-->
+<!--#include file="../../inc/md5.asp"-->
 <%
 dim UserID,Action,FoundErr,ErrMsg
 dim rsUser,sqlUser

@@ -1,4 +1,4 @@
-<!--#include file="../../FiveInc/conn.asp"-->
+<!--#include file="../../inc/conn.asp"-->
 <!--#include file="../admin.asp"-->
 <!-- #include file="../Inc/Head.asp" -->
 <%if Request.QueryString("mark")="southidc" then
@@ -115,7 +115,7 @@ rs2.close
           <td height="22" align="center" class="tr_southidc">网站图片</td>
           <td class="tr_southidc">
 		  <input name="SitePic" type="text" id="SitePic" value="<%=rs("sitepic")%>">
-		  <input name="Submit22" type="button" value="上传图片"  onClick="window.open('../../fiveInc/mx_upload_flash.asp?formname=form1&editname=SitePic&uppath=UploadFiles/Link&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">		<%if rs("sitepic")<>"" then response.write "<img src="""&rs("sitepic")&""">"%>  </td>
+		  <input name="Submit22" type="button" value="上传图片"  onClick="window.open('../../inc/mx_upload_flash.asp?formname=form1&editname=SitePic&uppath=UploadFiles/Link&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">		<%if rs("sitepic")<>"" then response.write "<img src="""&rs("sitepic")&""">"%>  </td>
     </tr>
     
     <tr>

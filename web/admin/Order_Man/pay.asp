@@ -1,4 +1,4 @@
-<!--#include file="../../FiveInc/conn.asp"-->
+<!--#include file="../../inc/conn.asp"-->
 <!--#include file="../admin.asp"-->
 <!-- #include file="../Inc/Head.asp" -->
 <%
@@ -69,8 +69,8 @@ function checkdata(the,id,sta,keyword,page)
            <dt><em>订单信息：</em>
                <ul class="order_base">
                    <li><span>订单编号：</span><%=rs("orderNum")%><input type="hidden" name="id" value="<%=id%>"></li>
-                   <li><span>商品总金额：</span>¥ <strong style="color:red; font-size:14px; font-family:Arial, Helvetica, sans-serif;"><%=totalmoeny%> </strong>元</li>
-                   <li><span>实际需付款金额：</span>¥ <strong style="color:red; font-size:14px; font-family:Arial, Helvetica, sans-serif;"><%=rs("totalmoney") + rs("floatmoney")%> </strong>元<input type="hidden" value="<%=rs("totalmoney") + rs("floatmoney")%>" name="totalmoney"></li>
+                   <li><span>商品总金额：</span>yen <strong style="color:red; font-size:14px; font-family:Arial, Helvetica, sans-serif;"><%=totalmoeny%> </strong>元</li>
+                   <li><span>实际需付款金额：</span>yen <strong style="color:red; font-size:14px; font-family:Arial, Helvetica, sans-serif;"><%=rs("totalmoney") + rs("floatmoney")%> </strong>元<input type="hidden" value="<%=rs("totalmoney") + rs("floatmoney")%>" name="totalmoney"></li>
                    <li><span>订单状态：</span><%=Easp.var(refund_status)%></li>
                </ul>
            </dt>

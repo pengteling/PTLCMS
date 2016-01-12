@@ -1,4 +1,4 @@
-<!--#include file="../../FiveInc/conn.asp"-->
+<!--#include file="../../inc/conn.asp"-->
 <!--#include file="../admin.asp"-->
 <!-- #include file="../Inc/Head.asp" -->
 <table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" class="table_southidc">

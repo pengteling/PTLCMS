@@ -1,4 +1,4 @@
-<!--#include file="../FiveInc/conn.asp"-->
+<!--#include file="../inc/conn.asp"-->
 <!--#include file="admin.asp"-->
 <!-- #include file="Inc/Head.asp" -->
 <%
@@ -39,7 +39,7 @@ sub ShowConfig()
     <tr> 
      <td width="10%" class="tr_southidc"><strong>banner一：</strong></td>
       <td width="50%" class="tr_southidc"> <input name="hdp1" type="text" id="hdp1" value="<%=hdp1%>" size="30" maxlength="255">
-      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../fiveinc/mx_upload_flash.asp?formname=form&editname=hdp1&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../inc/mx_upload_flash.asp?formname=form&editname=hdp1&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
       963*350</td>
       <td width="8%" class="tr_southidc">链接地址</td>
       <td width="0" class="tr_southidc"><input name="dizhi1" type="text" id="dizhi1" value="<%=dizhi1%>" maxlength="255"></td>
@@ -47,7 +47,7 @@ sub ShowConfig()
 	<tr> 
      <td class="tr_southidc"><strong>banner二：</strong></td>
       <td class="tr_southidc"> <input name="hdp2" type="text" id="hdp2" value="<%=hdp2%>" size="30" maxlength="255">
-      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../fiveinc/mx_upload_flash.asp?formname=form&editname=hdp2&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../inc/mx_upload_flash.asp?formname=form&editname=hdp2&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
 963*350</td>
       <td class="tr_southidc">链接地址</td>
       <td class="tr_southidc"><input name="dizhi2" type="text" id="dizhi2" value="<%=dizhi2%>" maxlength="255"></td>
@@ -55,7 +55,7 @@ sub ShowConfig()
 	<tr> 
      <td class="tr_southidc"><strong>banner三：</strong></td>
       <td class="tr_southidc"> <input name="hdp3" type="text" id="hdp3" value="<%=hdp3%>" size="30" maxlength="255">
-      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../fiveinc/mx_upload_flash.asp?formname=form&editname=hdp3&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../inc/mx_upload_flash.asp?formname=form&editname=hdp3&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
 963*350</td>
       <td class="tr_southidc">链接地址</td>
       <td class="tr_southidc"><input name="dizhi3" type="text" id="dizhi3" value="<%=dizhi3%>" maxlength="255"></td>
@@ -63,7 +63,7 @@ sub ShowConfig()
 	<tr> 
      <td class="tr_southidc"><strong>banner四：</strong></td>
       <td class="tr_southidc"> <input name="hdp4" type="text" id="hdp4" value="<%=hdp4%>" size="30" maxlength="255">
-      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../fiveinc/mx_upload_flash.asp?formname=form&editname=hdp4&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../inc/mx_upload_flash.asp?formname=form&editname=hdp4&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
 963*350</td>
       <td class="tr_southidc">链接地址</td>
       <td class="tr_southidc"><input name="dizhi4" type="text" id="dizhi4" value="<%=dizhi4%>" maxlength="255"></td>
@@ -71,7 +71,7 @@ sub ShowConfig()
 	<tr>
 	<td width="10%" class="tr_southidc"><strong>登陆框下一：</strong></td>
       <td width="50%" class="tr_southidc"> <input name="hdp5" type="text" id="hdp5" value="<%=hdp5%>" size="30" maxlength="255">
-      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../fiveinc/mx_upload_flash.asp?formname=form&editname=hdp5&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../inc/mx_upload_flash.asp?formname=form&editname=hdp5&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
       963*350</td>
       <td width="8%" class="tr_southidc">链接地址</td>
       <td width="0" class="tr_southidc"><input name="dizhi5" type="text" id="dizhi5" value="<%=dizhi5%>" maxlength="255"></td>
@@ -79,7 +79,7 @@ sub ShowConfig()
 	<tr> 
      <td class="tr_southidc"><strong>登陆框下二：</strong></td>
       <td class="tr_southidc"> <input name="hdp6" type="text" id="hdp6" value="<%=hdp6%>" size="30" maxlength="255">
-      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../fiveinc/mx_upload_flash.asp?formname=form&editname=hdp6&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../inc/mx_upload_flash.asp?formname=form&editname=hdp6&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
 963*350</td>
       <td class="tr_southidc">链接地址</td>
       <td class="tr_southidc"><input name="dizhi6" type="text" id="dizhi6" value="<%=dizhi6%>" maxlength="255"></td>
@@ -87,7 +87,7 @@ sub ShowConfig()
 	<tr> 
      <td class="tr_southidc"><strong>登陆框下三：</strong></td>
       <td class="tr_southidc"> <input name="hdp7" type="text" id="hdp7" value="<%=hdp7%>" size="30" maxlength="255">
-      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../fiveinc/mx_upload_flash.asp?formname=form&editname=hdp7&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../inc/mx_upload_flash.asp?formname=form&editname=hdp7&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
 963*350</td>
       <td class="tr_southidc">链接地址</td>
       <td class="tr_southidc"><input name="dizhi7" type="text" id="dizhi7" value="<%=dizhi7%>" maxlength="255"></td>
@@ -95,7 +95,7 @@ sub ShowConfig()
 	<tr> 
      <td class="tr_southidc"><strong>登陆框下四：</strong></td>
       <td class="tr_southidc"> <input name="hdp8" type="text" id="hdp8" value="<%=hdp8%>" size="30" maxlength="255">
-      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../fiveinc/mx_upload_flash.asp?formname=form&editname=hdp8&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../inc/mx_upload_flash.asp?formname=form&editname=hdp8&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
 963*350</td>
       <td class="tr_southidc">链接地址</td>
       <td class="tr_southidc"><input name="dizhi8" type="text" id="dizhi8" value="<%=dizhi8%>" maxlength="255"></td>
@@ -103,7 +103,7 @@ sub ShowConfig()
 	<tr>
 	<td width="10%" class="tr_southidc"><strong>右下一：</strong></td>
       <td width="50%" class="tr_southidc"> <input name="hdp9" type="text" id="hdp9" value="<%=hdp9%>" size="30" maxlength="255">
-      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../fiveinc/mx_upload_flash.asp?formname=form&editname=hdp9&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../inc/mx_upload_flash.asp?formname=form&editname=hdp9&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
       963*350</td>
       <td width="8%" class="tr_southidc">链接地址</td>
       <td width="0" class="tr_southidc"><input name="dizhi9" type="text" id="dizhi9" value="<%=dizhi9%>" maxlength="255"></td>
@@ -111,7 +111,7 @@ sub ShowConfig()
 	<tr> 
      <td class="tr_southidc"><strong>右下二：</strong></td>
       <td class="tr_southidc"> <input name="hdp10" type="text" id="hdp10" value="<%=hdp10%>" size="30" maxlength="255">
-      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../fiveinc/mx_upload_flash.asp?formname=form&editname=hdp10&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../inc/mx_upload_flash.asp?formname=form&editname=hdp10&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
 963*350</td>
       <td class="tr_southidc">链接地址</td>
       <td class="tr_southidc"><input name="dizhi10" type="text" id="dizhi10" value="<%=dizhi10%>" maxlength="255"></td>
@@ -119,7 +119,7 @@ sub ShowConfig()
 	<tr> 
      <td class="tr_southidc"><strong>右下三：</strong></td>
       <td class="tr_southidc"> <input name="hdp11" type="text" id="hdp11" value="<%=hdp11%>" size="30" maxlength="255">
-      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../fiveinc/mx_upload_flash.asp?formname=form&editname=hdp11&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../inc/mx_upload_flash.asp?formname=form&editname=hdp11&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
 963*350</td>
       <td class="tr_southidc">链接地址</td>
       <td class="tr_southidc"><input name="dizhi11" type="text" id="dizhi11" value="<%=dizhi11%>" maxlength="255"></td>
@@ -127,7 +127,7 @@ sub ShowConfig()
 	<tr> 
      <td class="tr_southidc"><strong>右下四：</strong></td>
       <td class="tr_southidc"> <input name="hdp12" type="text" id="hdp12" value="<%=hdp12%>" size="30" maxlength="255">
-      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../fiveinc/mx_upload_flash.asp?formname=form&editname=hdp12&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+      <input name="Submit222" type="button" value="上传图片" onClick="window.open('../inc/mx_upload_flash.asp?formname=form&editname=hdp12&uppath=UploadFiles&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
 963*350</td>
       <td class="tr_southidc">链接地址</td>
       <td class="tr_southidc"><input name="dizhi12" type="text" id="dizhi12" value="<%=dizhi12%>" maxlength="255"></td>
@@ -157,7 +157,7 @@ sub SaveConfig()
 	end if
 	dim fso,hf
 	set fso=Server.CreateObject(xiaodaofso)
-	set hf=fso.CreateTextFile(Server.mappath("../fiveinc/hdp.asp"),true)
+	set hf=fso.CreateTextFile(Server.mappath("../inc/hdp.asp"),true)
 	hf.write "<" & "%" & vbcrlf
 	hf.write "Const hdp1=" & chr(34) & trim(request("hdp1")) & chr(34) & "        '1" & vbcrlf
 	hf.write "Const dizhi1=" & chr(34) & trim(request("dizhi1")) & chr(34) & "        '1" & vbcrlf

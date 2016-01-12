@@ -1,4 +1,4 @@
-<!--#include file="../../FiveInc/conn.asp"-->
+<!--#include file="../../inc/conn.asp"-->
 <!--#include file="../Admin.asp"-->
 <!-- #include file="../Inc/Head.asp" -->
 <%
@@ -124,7 +124,7 @@ end if
           <td height="22" align="center" bgcolor="#A4B6D7" class="tr_southidc">网站图片</td>
           <td>
 		  <input name="SitePic" type="text" id="SitePic">
-		  <input name="Submit22" type="button" value="上传图片"  onClick="window.open('../../fiveInc/mx_upload_flash.asp?formname=form1&editname=SitePic&uppath=UploadFiles/Link&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">		  </td>
+		  <input name="Submit22" type="button" value="上传图片"  onClick="window.open('../../inc/mx_upload_flash.asp?formname=form1&editname=SitePic&uppath=UploadFiles/Link&filelx=jpg','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">		  </td>
         </tr>
          <tr>
       <td height="22" align="center" class="tr_southidc">序号</td>

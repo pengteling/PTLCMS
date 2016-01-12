@@ -1,4 +1,4 @@
-<!--#include file="../../FiveInc/conn.asp"-->
+<!--#include file="../../inc/conn.asp"-->
 <!--#include file="../admin.asp"-->
 <!-- #include file="../Inc/Head.asp" -->
 <%
@@ -85,7 +85,7 @@ set rs=nothing
   <TD align="left" bgcolor="#ECF5FF">
     <input name="photo" type="text" id="photo" size="50">
     <span class="tr_southidc">
-    <input name="Submit222" type="button" value="上传->"  onClick="window.open('../../FiveInc/mx_upload_flash.asp?formname=form1&editname=photo&uppath=UploadFiles/Ad&filelx=jpgswf','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+    <input name="Submit222" type="button" value="上传->"  onClick="window.open('../../inc/mx_upload_flash.asp?formname=form1&editname=photo&uppath=UploadFiles/Ad&filelx=jpgswf','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
     <span class="red">*</span></span></TR>
 
 <TR bgcolor="#F5F5F5" id="videoUrl" <%if tid=0 then%>style="display:none;"<%end if%>>
@@ -93,7 +93,7 @@ set rs=nothing
   <TD align="left" bgcolor="#ECF5FF">
     <input name="video" type="text" id="video" size="50">
     <span class="tr_southidc">
-    <input name="Submit222" type="button" value="上传->"  onClick="window.open('../../FiveInc/mx_upload_flash.asp?formname=form1&editname=video&uppath=UploadFiles/Ad&filelx=jpgswf','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+    <input name="Submit222" type="button" value="上传->"  onClick="window.open('../../inc/mx_upload_flash.asp?formname=form1&editname=video&uppath=UploadFiles/Ad&filelx=jpgswf','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
     </span></TR>
 <TR bgcolor="#F5F5F5">
 	<TD align=right bgcolor="#ECF5FF">&nbsp;	  </TD>

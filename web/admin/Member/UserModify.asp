@@ -1,6 +1,6 @@
-<!--#include file="../../FiveInc/conn.asp"-->
+<!--#include file="../../inc/conn.asp"-->
 <!--#include file="../admin.asp"-->
-<!--#include file="../../FiveInc/md5.asp"-->
+<!--#include file="../../inc/md5.asp"-->
 <!-- #include file="../Inc/Head.asp" -->
 <%
 dim UserID,Action,FoundErr,ErrMsg
@@ -46,7 +46,7 @@ else
 					founderr=true
 					errmsg=errmsg & "<br><li>请输入密码(不能大于12小于4)。如不想修改，请留空！</li>"
 				else
-					if Instr(Password,"=")>0 or Instr(Password,"%")>0 or Instr(Password,chr(32))>0 or Instr(Password,"?")>0 or Instr(Password,"&")>0 or Instr(Password,";")>0 or Instr(Password,",")>0 or Instr(Password,"'")>0 or Instr(Password,",")>0 or Instr(Password,chr(34))>0 or Instr(Password,chr(9))>0 or Instr(Password,"")>0 or Instr(Password,"$")>0 then
+					if Instr(Password,"=")>0 or Instr(Password,"%")>0 or Instr(Password,chr(32))>0 or Instr(Password,"?")>0 or Instr(Password,"&")>0 or Instr(Password,";")>0 or Instr(Password,",")>0 or Instr(Password,"'")>0 or Instr(Password,",")>0 or Instr(Password,chr(34))>0 or Instr(Password,chr(9))>0 or Instr(Password,"")>0 or Instr(Password,"$")>0 then
 						errmsg=errmsg+"<br><li>密码中含有非法字符</li>"
 						founderr=true
 					end if

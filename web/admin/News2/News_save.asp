@@ -1,5 +1,5 @@
-<!--#include file="../../FiveInc/conn.asp"-->
-<!--#include file="../../FiveInc/Pinyin.asp"-->
+<!--#include file="../../inc/conn.asp"-->
+<!--#include file="../../inc/Pinyin.asp"-->
 <!--#include file="../admin.asp"-->
 <!-- #include file="../Inc/Head.asp" -->
 <!-- #include file="../Inc/ReplaceSaveRemoteFile.asp" -->

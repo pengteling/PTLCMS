@@ -1,4 +1,4 @@
-<!--#include file="../../FiveInc/conn.asp"-->
+<!--#include file="../../inc/conn.asp"-->
 <!--#include file="../admin.asp"-->
 <!-- #include file="../Inc/Head.asp" -->
 <%
@@ -123,8 +123,8 @@ $(function(){
            <dt><em>订单信息：</em>
                <ul class="order_base">
                    <li><span>订单编号：</span><%=rs("orderNum")%><input type="hidden" name="id" value="<%=id%>"></li>
-                   <li><span>商品总金额：</span>¥ <strong style="color:red; font-size:14px; font-family:Arial, Helvetica, sans-serif;"><%=totalmoeny%> </strong>元</li>
-                   <li><span>实际需付款金额：</span>¥ <strong style="color:red; font-size:14px; font-family:Arial, Helvetica, sans-serif;"><%=rs("totalmoney") + rs("floatmoney")%> </strong>元</li>
+                   <li><span>商品总金额：</span>yen <strong style="color:red; font-size:14px; font-family:Arial, Helvetica, sans-serif;"><%=totalmoeny%> </strong>元</li>
+                   <li><span>实际需付款金额：</span>yen <strong style="color:red; font-size:14px; font-family:Arial, Helvetica, sans-serif;"><%=rs("totalmoney") + rs("floatmoney")%> </strong>元</li>
                    <li><span>订单状态：</span><%=Easp.var(refund_status)%></li>
                    <li><span>管理员操作：</span>
                    
@@ -199,9 +199,9 @@ $(function(){
                     <tr>
                         <td><a href="../show.asp?id=<%=rs("goodsid")%>" target="_blank"><%=rs("goodsName")%></a></td>	
                        
-                        <td>¥<%=rs("price")%></td>
+                        <td>yen<%=rs("price")%></td>
                         <td><%=rs("count")%></td>
-                        <td class="price">¥<%=rs("totalprice")%></td>
+                        <td class="price">yen<%=rs("totalprice")%></td>
                     </tr>
                     
                   <%
@@ -211,7 +211,7 @@ $(function(){
 				  %>  
                     
                     <tr>
-                        <td colspan="5" class="info">商品共计：<span><%=countNum%></span>件　商品总金额：<span>¥<%=totalmoeny%></span>元</td>
+                        <td colspan="5" class="info">商品共计：<span><%=countNum%></span>件　商品总金额：<span>yen<%=totalmoeny%></span>元</td>
                     </tr>
                 </table>
            </dt>

@@ -1,4 +1,4 @@
-<!--#include file="../../FiveInc/conn.asp"-->
+<!--#include file="../../inc/conn.asp"-->
 <!--#include file="../admin.asp"-->
 <!-- #include file="../Inc/Head.asp" -->
 
@@ -27,7 +27,7 @@ function CheckForm(){
      <td align="right" class="tr_southidc">导入文件路径： </td>
       <td class="tr_southidc">
      <input name="DefaultPicUrl" type="text" id="DefaultPicUrl" value="<%=DefaultPicUrl%>" size="30" maxlength="120" />
-    <input name="Submit222" type="button" value="上传Excel文件"  onClick="window.open('../../FiveInc/mx_upload_flash.asp?formname=myform&editname=DefaultPicUrl&uppath=company&filelx=file','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
+    <input name="Submit222" type="button" value="上传Excel文件"  onClick="window.open('../../inc/mx_upload_flash.asp?formname=myform&editname=DefaultPicUrl&uppath=company&filelx=file','','status=no,scrollbars=no,top=300,left=200,width=420,height=136')">
     </td>
     </tr>
     <tr>

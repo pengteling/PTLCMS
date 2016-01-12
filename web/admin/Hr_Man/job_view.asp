@@ -1,4 +1,4 @@
-<!--#include file="../../FiveInc/conn.asp"-->
+<!--#include file="../../inc/conn.asp"-->
 <!--#include file="../admin.asp"-->
 <!-- #include file="../Inc/Head.asp" -->
 <input type="button" value="返回上页" onClick="location.href='manage_jobbook.asp'">
@@ -592,7 +592,7 @@
                 <td width="648" nowrap colspan="6"><p align="left"><strong><span class="ny-zxbm-fuhao">*</span></strong><strong>承诺 </strong></p></td>
               </tr>
               <tr>
-                <td width="648" colspan="6"><p align="left">    本人自愿申请加入宗申产业集团，本着诚实守信的原则，在此郑重承诺：上述个人信息完全真实、准确，若因失实所造成的一切后果及责任由本人全部承担；同时人力资源部已将职位申请书的重要度和注意事项传达于我，我已确认完全了解其含义。<br>
+                <td width="648" colspan="6"><p align="left">    本人自愿申请加入宗申产业集团，本着诚实守信的原则，在此郑重承诺：上述个人信息完全真实、准确，若因失实所造成的一切后果及责任由本人全部承担；同时人力资源部已将职位申请书的重要度和注意事项传达于我，我已确认完全了解其含义。<br>
                   </p>
                   <div align="right">应聘承诺人：<span class="ny-zxbm-sm">
                     <input type="text" name="field137" id="field137" class=" ny-zxbm-sm-w">

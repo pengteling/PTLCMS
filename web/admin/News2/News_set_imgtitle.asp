@@ -1,4 +1,4 @@
-<!doctype html><!--#include file="../../FiveInc/conn.asp"-->
+<!doctype html><!--#include file="../../inc/conn.asp"-->
 <!--#include file="../admin.asp"-->
 <!-- #include file="../Inc/Head.asp" -->
 <!-- #include file="news_config.asp" -->

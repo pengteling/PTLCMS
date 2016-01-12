@@ -1,4 +1,4 @@
-<!--#include file="../../FiveInc/conn.asp"-->
+<!--#include file="../../inc/conn.asp"-->
 <!--#include file="../admin.asp"-->
 <html xmlns:x="urn:schemas-microsoft-com:office:excel">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

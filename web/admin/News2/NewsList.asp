@@ -1,4 +1,4 @@
-<!--#include file="../../FiveInc/conn.asp"-->
+<!--#include file="../../inc/conn.asp"-->
 <% 
 function showpage(totalnumber,maxperpage,filename)
 dim n
