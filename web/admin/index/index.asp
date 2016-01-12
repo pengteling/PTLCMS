@@ -1,28 +1,39 @@
 <!--#include virtual="/admin/inc/head.asp"-->
 
-<%
-if groupid=2 then
-	'sql_sonid_page = "0"
-	sql_sonid_page=""
-else
-	rs.open "select sonid_page from zh_adminGroup where id="&groupid
-	if not rs.eof then
-		my_sonid_page =rs(0)
-		if my_sonid_page="" then my_sonid_page="0"
-		sql_sonid_page=" and cateid in ("&my_sonid_page&")"
-	end if
-	rs.close
-end if
-%>
 
-<table width="700" border="0" align="center" cellpadding="0" cellspacing="0" style="padding:4px 0 10px 0;">
+<body>
+
+    <div id="wrapper">
+    <!--#include virtual="/admin/inc/top.asp"-->
+
+<!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Blank</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+</div>
+                     <!-- /.row -->
+                <div class="row">
+                  <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Kitchen Sink
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+
+
+                    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" style="padding:4px 0 10px 0;">
   <tr>
     <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td height="1"></td>
       </tr>
     </table>
-        <table width="699" height="45" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CDCDCD">
+        <table width="100%" height="45" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CDCDCD">
           <tr bgcolor="#FAFAFA">
             <td width="56%" height="43"><table width="100%" border="0" align="center" cellpadding="5" cellspacing="0">
                 <tr>
@@ -34,16 +45,16 @@ end if
               </marquee>            </td>
           </tr>
         </table>
-      <table width="699" height="30" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CDCDCD" style="margin:2px 0 0 0;">
+      <table width="100%" height="30" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CDCDCD" style="margin:2px 0 0 0;">
           <tr>
-            <td height="30" bgcolor="#FFFFFF"><font color="#006699">　<font color="#006699"><strong>系统管理说明：</strong></font></font></td>
+            <td height="30" bgcolor="#FFFFFF"><font color="#006100%">　<font color="#006100%"><strong>系统管理说明：</strong></font></font></td>
           </tr>
           <tr>
             <td style="line-height:20px;" bgcolor="#FFFFFF">
-			　·修改系统配置 (网站名称,关键字,联系电话等)<br>
-			　·修改公司简介 (选择一个项目进行内容修改)<br>
+      　·修改系统配置 (网站名称,关键字,联系电话等)<br>
+      　·修改公司简介 (选择一个项目进行内容修改)<br>
             　·添加文章信息 (选择文章属于哪一个栏目)<br>
-			　·添加/修改管理员帐号 (本系统同一帐号同一时间只能一人使用)<br>			</td>
+      　·添加/修改管理员帐号 (本系统同一帐号同一时间只能一人使用)<br>      </td>
           </tr>
         </table>
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -51,9 +62,9 @@ end if
             <td height="1"></td>
           </tr>
         </table>
-      <table width="699" height="270" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CDCDCD">
+      <table width="100%" height="270" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CDCDCD">
           <tr bgcolor="#FAFAFA">
-            <td height="30" colspan="2">　<font color="#006699"><strong>服务器信息</strong><font color="#006699"><strong>：</strong></font></font></td>
+            <td height="30" colspan="2">　<font color="#006100%"><strong>服务器信息</strong><font color="#006100%"><strong>：</strong></font></font></td>
           </tr>
           <tr bgcolor="#FAFAFA">
             <td height="32">　服务器类型：<font face="Verdana, Arial, Helvetica, sans-serif"><%=Request.ServerVariables("OS")%>(IP:<%=Request.ServerVariables("LOCAL_ADDR")%>)</font></td>
@@ -71,15 +82,15 @@ end if
             <td width="48%" height="32">　脚本超时时间<span class="small2">：</span><font color=#0076AE><%=Server.ScriptTimeout%></font> 秒</td>
             <td width="52%" height="32">　<font face="Verdana, Arial, Helvetica, sans-serif">CDONTS</font>组件支持<span class="small2">：</span>
          <%
-	    on error resume next
-	    Server.CreateObject("CDONTS.NewMail")
-		if err=0 then 
-		  response.write("<font color=#0076AE>√</font>")
-		else
+      on error resume next
+      Server.CreateObject("CDONTS.NewMail")
+    if err=0 then 
+      response.write("<font color=#0076AE>√</font>")
+    else
           response.write("<font color=red>×</font>")
-		end if	 
-		err=0
-	  	%>            </td>
+    end if   
+    err=0
+      %>            </td>
           </tr>
           <tr bgcolor="#FAFAFA">
             <td width="48%" height="32">　虚拟路径<font face="Verdana, Arial, Helvetica, sans-serif">：<%=Request.ServerVariables("SCRIPT_NAME")%></font></td>
@@ -101,21 +112,21 @@ end if
 dim thesoft,vOS
 thesoft=Request.ServerVariables("HTTP_USER_AGENT")
 if instr(thesoft,"Windows NT 5.0") then
-	vOS="Windows 2000"
+  vOS="Windows 2000"
 elseif instr(thesoft,"Windows NT 5.2") then
-	vOs="Windows 2003"
+  vOs="Windows 2003"
 elseif instr(thesoft,"Windows NT 5.1") then
-	vOs="Windows XP"
+  vOs="Windows XP"
 elseif instr(thesoft,"Windows NT") then
-	vOs="Windows NT"
+  vOs="Windows NT"
 elseif instr(thesoft,"Windows 9") then
-	vOs="Windows 9x"
+  vOs="Windows 9x"
 elseif instr(thesoft,"unix") or instr(thesoft,"linux") or instr(thesoft,"SunOS") or instr(thesoft,"BSD") then
-	vOs="类Unix"
+  vOs="类Unix"
 elseif instr(thesoft,"Mac") then
-	vOs="Mac"
+  vOs="Mac"
 else
-	vOs="Other"
+  vOs="Other"
 end if
 response.Write(vOs)
 %>            </td>
@@ -131,46 +142,46 @@ response.Write(vOs)
             <td height="1"></td>
           </tr>
         </table>
-      <table width="699" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CDCDCD">
+      <table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CDCDCD">
           <tr bgcolor="#FAFAFA">
-            <td height="30" colspan="2">　<font color="#006699"><strong>本系统需要的软件环境：</strong></font></td>
+            <td height="30" colspan="2">　<font color="#006100%"><strong>本系统需要的软件环境：</strong></font></td>
           </tr>
           <tr bgcolor="#FAFAFA">
             <td width="48%" height="25">　<font face="Verdana, Arial, Helvetica, sans-serif">JRO.JetEngine(ACCESS</font><font face="Verdana, Arial, Helvetica, sans-serif">&nbsp; </font> 数据库<span class="small2"><font face="Verdana, Arial, Helvetica, sans-serif">)</font>：</span>
                 <%
-	    'on error resume next
-	    Server.CreateObject("JRO.JetEngine")
-		if err=0 then 
-		  response.write("<font color=#0076AE>√</font>")
-		else
+      'on error resume next
+      Server.CreateObject("JRO.JetEngine")
+    if err=0 then 
+      response.write("<font color=#0076AE>√</font>")
+    else
           response.write("<font color=red>×</font>")
-		end if	 
-		err=0
-	  %>            </td>
+    end if   
+    err=0
+    %>            </td>
             <td width="52%" height="25">　数据库使用<span class="small2">：</span>
                 <%
-	    'on error resume next
-	    Server.CreateObject("adodb.connection")
-		if err=0 then 
-		  response.write("<font color=#0076AE>√,可以使用本系统</font>")
-		else
+      'on error resume next
+      Server.CreateObject("adodb.connection")
+    if err=0 then 
+      response.write("<font color=#0076AE>√,可以使用本系统</font>")
+    else
           response.write("<font color=red>×,不能使用本系统</font>")
-		end if	 
-		err=0
-	  %>            </td>
+    end if   
+    err=0
+    %>            </td>
           </tr>
           <tr bgcolor="#FAFAFA">
             <td height="25">　<span class="small2"><font face="Verdana, Arial, Helvetica, sans-serif">FSO</font></span>文本文件读写<span class="small2">：</span>
                 <%
-	    'on error resume next
-	    Server.CreateObject(xiaodaofso)
-		if err=0 then 
-		  response.write("<font color=#0076AE>√,可以使用本系统</font>")
-		else
+      'on error resume next
+      Server.CreateObject(xiaodaofso)
+    if err=0 then 
+      response.write("<font color=#0076AE>√,可以使用本系统</font>")
+    else
           response.write("<font color=red>×，不能使用此系统</font>")
-		end if	 
-		err=0
-	  %>            </td>
+    end if   
+    err=0
+    %>            </td>
             <td height="25">　Microsoft.XMLHTTP
               <%If Not IsObjInstalled("Microsoft.XMLHTTP") Then%>
                 <font color="red">×，不能使用此系统</font>
@@ -195,9 +206,9 @@ response.Write(vOs)
             <td height="1"></td>
           </tr>
         </table>
-      <table width="699" height="79" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CDCDCD">
+      <table  width="100%" height="79" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CDCDCD">
           <tr bgcolor="#FAFAFA">
-            <td height="30" colspan="2"><font color="#006699">　<font color="#006699"><strong>联系信息：</strong></font></font></td>
+            <td height="30" colspan="2"><font color="#006100%">　<font color="#006100%"><strong>联系信息：</strong></font></font></td>
           </tr>
           <tr bgcolor="#FAFAFA">
             <td width="48%" height="25">　<font face="Verdana, Arial, Helvetica, sans-serif">官方站点：<a href="<%=SystemWeb%>" target="_blank"><%=SystemWeb%></a></font> </td>
@@ -210,6 +221,27 @@ response.Write(vOs)
       </table></td>
   </tr>
 </table>
+  </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                </div>
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
 
 </body>
 </html>

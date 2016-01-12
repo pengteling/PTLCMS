@@ -18,9 +18,7 @@ end if
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,5 +49,32 @@ end if
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
 </head>
 <iframe src="/admin/keepsession.asp" frameborder="0" width="0" height="0"></iframe>
+
+<%
+if groupid=2 then
+    'sql_sonid_page = "0"
+    sql_sonid_page=""
+else
+    rs.open "select sonid_page from zh_adminGroup where id="&groupid
+    if not rs.eof then
+        my_sonid_page =rs(0)
+        if my_sonid_page="" then my_sonid_page="0"
+        sql_sonid_page=" and cateid in ("&my_sonid_page&")"
+    end if
+    rs.close
+end if
+%>

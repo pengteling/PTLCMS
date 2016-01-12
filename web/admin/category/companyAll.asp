@@ -79,8 +79,7 @@ End If
 <body>
 
     <div id="wrapper">
-		<!--#include virtual="/admin/inc/top.asp"-->
-        
+		<!--#include virtual="/admin/inc/top.asp"-->  
 
             
 
@@ -131,13 +130,13 @@ sub classlist(byval t0)
 			'If data(3,i)>1 then class_list=class_list& "├"
 		if  data(3,i)=1  then '一级分类 和 有下级栏目的 分类显示 +号图标  or instr(data(4,i),",")>0
 					imgno=3
-					trclass="td_southidc"
+					'trclass="td_southidc"
 		else
 					imgno=3		
-					trclass="td_southidc"		
+					'trclass="td_southidc"		
 		end if
 				trclass="td_southidc" &	data(3,i)	
-				class_list=class_list&"<tr class="""&trclass&"""><td align=""left"">"
+				class_list=class_list&"<tr><td>"
 				tempKG=""
 				For k=2 To data(3,i)
 					class_list=class_list&"&nbsp;&nbsp;&nbsp;&nbsp;"
@@ -161,7 +160,7 @@ sub classlist(byval t0)
 					catetype= "单链接"
 				catetype_str="<a href=""companyadd.asp?Act=edit&ID="&data(0,i)&""">修改属性</a> | <a href=""companyadd.asp?followid="&data(0,i)&""">添加下级栏目</a> | <a href=""companyAll.asp?Act=del&ID="&data(0,i)&""" onClick=""return confirm('删除之后,相关内容也会被删除,并且不能恢复!\n\n确定要删除吗？');"">删除</a>"
 				end select
-				class_list=class_list & "<td align=""center"" class="""&trclass&""">"&catetype&" "
+				class_list=class_list & "<td>"&catetype&" "
 				
 				
 					
@@ -173,7 +172,7 @@ sub classlist(byval t0)
 				
 				class_list=class_list &"</td>"
 				
-				class_list=class_list & "<td align=""left""  class="""&trclass&""" style=""padding-left:25px;"">"
+				class_list=class_list & "<td>"
 				
 				class_list=class_list &tempKG&catetype_str
 				
@@ -208,17 +207,7 @@ response.write class_list
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
+    
 <script type="text/javascript">
 $(function(){
 		

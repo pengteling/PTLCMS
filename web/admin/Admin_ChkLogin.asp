@@ -64,13 +64,13 @@ if FoundErr<>True then
 			session("RndPassword")=RndPassword
 			LoginRs.close
 			set LoginRs=nothing
-		Response.Redirect "index.asp"
+		Response.Redirect "index/"
 		
 	else
 	
 		FoundErr=True
 		ErrMsg=ErrMsg & "<br><li>用户名或密码错误！！！</li>"
-		response.write md5("pengteling")
+		'response.write md5("pengteling")
 		
 			
 			
