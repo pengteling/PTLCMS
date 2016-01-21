@@ -61,6 +61,9 @@ end if
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
+    <script src="/js/json2html.js"></script>
+    <script src="/js/jquery.json2html.js"></script>
+
 </head>
 <iframe src="/admin/keepsession.asp" frameborder="0" width="0" height="0"></iframe>
 
