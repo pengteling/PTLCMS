@@ -2,6 +2,7 @@
 <body>
     <div id="wrapper">
 <!--#include virtual="/admin/inc/top.asp"-->
+<!--#include virtual="/admin/db/comm.asp"-->
 
 <!-- Page Content -->
         <div id="page-wrapper">
@@ -21,11 +22,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                         <div class="table-responsive">
-<%
-columns = "id,title,content_zy"
-columns_name ="ID,名称,内容"
-tablename = "news_c"
-%>
+
 
 <table  class="table table-striped table-bordered table-hover">
     <thead id="theadlist">
@@ -47,7 +44,9 @@ tablename = "news_c"
 <script>
 $(function(){
 var json =<%
-Set rs = Easp.Db.Query("Select "&columns&" from "&tablename&"")
+Easp.Db.PageSize = 1
+Set rs = Easp.Db.GetRS("Select "&columns&" from "&tablename&"")
+
 Easp.Print Easp.Encode(rs)
 Easp.Db.Close(rs)
 %>;
@@ -84,7 +83,7 @@ $("#datalist").json2html(json.rows,transform);
 </script>
 
 
-
+<%=Easp.Db.GetPager("bootstrap")%>
 
   							</div>
                             <!-- /.table-responsive -->
