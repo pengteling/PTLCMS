@@ -85,10 +85,12 @@ $(document).ready(function() {
      
     //alert($("textarea").val());
 });
-    editor.on('postEdit',function(e, json, data){
+    editor.on('preEdit',function(e, json, data){
       //alert("er");
       
+    if(editor.modifier().attr("id")==data.DT_RowId){
       editor1.sync();
+    }
       //alert(editor1.html());
       
       //KindEditor.remove('textarea');
