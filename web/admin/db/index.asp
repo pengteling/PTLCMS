@@ -4,6 +4,130 @@
 <!--#include virtual="/admin/inc/top.asp"-->
 <!--#include virtual="/admin/db/comm.asp"-->
 
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="/js/Editor/css/editor.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="/js/Editor/js/dataTables.editor.min.js"></script>
+<script>
+/*
+ * Editor client script for DB table news
+ * Created by http://editor.datatables.net/generator
+ */
+var k =1;
+var editor1;
+(function($){
+
+$(document).ready(function() {
+  var editor = new $.fn.dataTable.Editor( {
+    ajax: 'getdatajson.asp',
+    table: '#news',
+    fields: [
+      {
+        "label": "title",
+        "name": "title"
+      },
+      {
+        "label": "content",
+        "name": "content_zy",
+        "type": "textarea"
+      }
+    ]
+  } );
+ // New record
+    $('a.editor_create').on('click', function (e) {
+        e.preventDefault();
+ 
+        editor.create( {
+            title: 'Create new record',
+            buttons: 'Add'
+        } );
+    } );
+ 
+    // Edit record
+    $('#news').on('click', 'a.editor_edit', function (e) {
+        e.preventDefault();
+ 
+        editor.edit( $(this).closest('tr'), {
+            title: 'Edit record',
+            buttons: 'Update'
+        } );
+    } );
+ 
+    // Delete a record
+    $('#news').on('click', 'a.editor_remove', function (e) {
+        e.preventDefault();
+ 
+        editor.remove( $(this).closest('tr'), {
+            title: 'Delete record',
+            message: 'Are you sure you wish to remove this record?',
+            buttons: 'Delete'
+        } );
+    } );
+
+
+
+    editor.on('open', function() {
+    //editor.show(); //Shows all fields
+    //editor.hide('ID');
+    //editor.hide('Field_Name_1');
+    //alert($("#DTE_Field_content_zy").val());
+ 
+     $.getScript('/kindeditor/kindeditor-min.js', function() {
+            KindEditor.basePath = '/kindeditor/';
+            editor1 =KindEditor.create('textarea');
+            //editor1.sync();
+            //alert($("textarea").val());
+          });
+     
+     
+    //alert($("textarea").val());
+});
+    editor.on('postEdit',function(e, json, data){
+      //alert("er");
+      
+      editor1.sync();
+      //alert(editor1.html());
+      
+      //KindEditor.remove('textarea');
+    })
+    editor.on('close',function(){
+      //alert("erer");
+
+      KindEditor.remove('textarea');
+    })
+
+  var table = $('#news').DataTable( {
+    dom: 'Bfrtip',
+    ajax: 'getdatajson.asp',
+    columns: [
+      {
+        "data": "title"
+      },
+      {
+        "data": "content_zy"
+      },
+      {
+                "data": "null",
+                "className": "center",
+                "defaultContent": '<a href="" class="editor_edit">Edit</a> / <a href="" class="editor_remove">Delete</a>'
+            }
+    ],
+    select: true,
+    lengthChange: false,
+    buttons: [
+      { extend: 'create', editor: editor },
+      { extend: 'edit',   editor: editor },
+      { extend: 'remove', editor: editor }
+    ]
+  } );
+} );
+
+}(jQuery));
+
+</script>
 <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
@@ -24,66 +148,26 @@
                         <div class="table-responsive">
 
 
-<table  class="table table-striped table-bordered table-hover">
-    <thead id="theadlist">
-    <tr>
-        <%
-        columns_name_arr = split(columns_name,",")
-        for i =0 to ubound(columns_name_arr)
-        response.write "<th>"&columns_name_arr(i)&"</th>"
-        next
-        %>
-        <th>操作</th>
-    </tr>
-                                        
-    </thead>
-    <tbody id="datalist">
-    </tbody>
-</table>
-
-<script>
-$(function(){
-var json =<%
-Easp.Db.PageSize = 1
-Set rs = Easp.Db.GetRS("Select "&columns&" from "&tablename&"")
-
-Easp.Print Easp.Encode(rs)
-Easp.Db.Close(rs)
-%>;
-var transform = {"tag":"tr","children":[
-<%
-columns_arr = split(columns,",")
-for i=0 to ubound(columns_arr)
-    %>
-{"tag":"td","html":"${<%=columns_arr(i)%>}"}
-<%
-    if i=ubound(columns_arr) then
-
-        else
-            response.write ","
-    end if
-next
-
-%>,{"tag":"td","html":"<a href='javascript:void(0)' data-toggle='modal' data-target='#win-new-info' data-infoid='${id}'>编辑</a> <a data-toggle='modal' data-target='#myModal' data-infoid='${id}'>删除</a>"}
-  ]};
-$("#datalist").json2html(json.rows,transform);
-
-//alert(json.rows[0]);
-// var tempstr="";
-// var json2 = json.rows[0];
-// for (var i in json2){
-//     tempstr += "<th>"+i+"</th>";
-
-// }
-// tempstr="<tr>"+tempstr+"</tr>";
-
-// $("#theadlist").html(tempstr);
-
-})  ;
-</script>
 
 
-<%=Easp.Db.GetPager("bootstrap")%>
+
+      <h1>
+        DataTables Editor <span>news</span>
+      </h1>
+      <a href="" class="editor_create">添加新记录</a>
+      <table cellpadding="0" cellspacing="0" border="0" class="display" id="news" width="100%">
+        <thead>
+          <tr>
+            <th>title</th>
+            <th>content</th>
+            <th>Edit / Delete</th>
+          </tr>
+        </thead>
+      </table>
+
+
+
+
 
   							</div>
                             <!-- /.table-responsive -->
@@ -106,63 +190,6 @@ $("#datalist").json2html(json.rows,transform);
 
 
 
- <div class="modal fade" id="win-new-info" role="dialog" aria-hidden="true" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="modal-title">添加新网站</h4>
-        </div>
-        <div class="modal-body">
-          <form action="?action=savenew" method="post" class="form" id="form-addnew">
-            <input type="hidden" name="cid" id="cid" value="">
-            <div class="form-group">
-              <label for="title" class="control-label">网站名称：</label>
-              <input type="text" name="sitename" id="sitename_add" class="form-control" value="" placeholder="请输入..." />
-            </div>
-            <div class="form-group">
-              <label for="title" class="control-label">客户名称：</label>
-              <input type="text" name="sitecompany" id="sitecompany_add" class="form-control" value="" placeholder="请输入..." />
-            </div>
-            <div class="form-group">
-              <label for="title" class="control-label">联系人：</label>
-              <input type="text" name="lxperson" id="lxperson_add" class="form-control" value="" placeholder="请输入..." />
-            </div>
-            <div class="form-group">
-              <label for="title" class="control-label">联系电话：</label>
-              <input type="text" name="lxtel" id="lxtel_add" class="form-control" value="" placeholder="请输入电话..." />
-            </div>
-            <div class="form-group">
-              <label for="title" class="control-label">上线时间：</label>
-              <input type="text" name="start_date" id="start_date_add" class="form-control" value="2016-01-21" placeholder="格式形如2014-5-23..." />
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary" id="btn-sumbit">保存</button>
-        </div>
-      </div>
-      <!-- /.modal-content --> 
-    </div>
-    <!-- /.modal-dialog --> 
-  </div>
-  <div class="modal small fade" id="myModal" role="dialog" aria-hidden="true" tabindex="-1">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 id="myModalLabel">确认删除</h3>
-        </div>
-        <div class="modal-body">
-          <p class="error-text"><i class="icon-warning-sign modal-icon"></i>确认要删除这个网站?删除后无法恢复！</p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
-          <a href="Del.asp?id=XXX" class="btn btn-danger">删除</a> </div>
-      </div>
-    </div>
-  </div>
-
+ 
 </body>
 </html>
