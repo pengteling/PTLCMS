@@ -11,6 +11,23 @@
 
 <link rel="stylesheet" type="text/css" href="/js/Editor/css/editor.dataTables.min.css">
 <script type="text/javascript" charset="utf8" src="/js/Editor/js/dataTables.editor.min.js"></script>
+<style>
+div.DTED_Lightbox_Wrapper {
+    left: 1em;
+    right: 1em;
+    margin-left: 0;
+    width: auto;
+    z-index:10001;
+
+}
+div.DTED_Lightbox_Background {
+  z-index:10000;
+}
+div.DTE_Body div.DTE_Body_Content div.DTE_Field>div.DTE_Field_Input {
+    float: right;
+    width: 100%;
+}
+</style>
 <script>
 /*
  * Editor client script for DB table news
@@ -69,28 +86,32 @@ $(document).ready(function() {
 
 
 
-    editor.on('open', function() {
+    editor.on('open', function(e,json,data) {
     //editor.show(); //Shows all fields
     //editor.hide('ID');
     //editor.hide('Field_Name_1');
     //alert($("#DTE_Field_content_zy").val());
- 
+  //if(editor.modifier().attr("id")==data.DT_RowId){
      $.getScript('/kindeditor/kindeditor-min.js', function() {
             KindEditor.basePath = '/kindeditor/';
             editor1 =KindEditor.create('textarea');
             //editor1.sync();
             //alert($("textarea").val());
           });
+  // }
      
      
     //alert($("textarea").val());
 });
-    editor.on('preEdit',function(e, json, data){
+    editor.on('processing',function(){
       //alert("er");
       
-    if(editor.modifier().attr("id")==data.DT_RowId){
+   //if(editor.modifier().attr("id")==data.DT_RowId){
       editor1.sync();
-    }
+  //    alert("33");
+      console.log("Eee");
+      //editor.fields("DTE_Field_content_zy").html(editor1.html());
+   // }
       //alert(editor1.html());
       
       //KindEditor.remove('textarea');
