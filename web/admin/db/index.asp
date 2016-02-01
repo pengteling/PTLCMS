@@ -34,7 +34,7 @@ div.DTE_Body div.DTE_Body_Content div.DTE_Field>div.DTE_Field_Input {
  * Created by http://editor.datatables.net/generator
  */
 var k =1;
-var editor1;
+var editor1,editor2;
 (function($){
 
 $(document).ready(function() {
@@ -43,12 +43,17 @@ $(document).ready(function() {
     table: '#news',
     fields: [
       {
-        "label": "title",
+        "label": "标题",
         "name": "title"
       },
       {
-        "label": "content",
+        "label": "摘要",
         "name": "content_zy",
+        "type": "textarea"
+      },
+      {
+        "label": "内容",
+        "name": "content",
         "type": "textarea"
       }
     ]
@@ -58,7 +63,7 @@ $(document).ready(function() {
         e.preventDefault();
  
         editor.create( {
-            title: 'Create new record',
+            title: '增加记录',
             buttons: 'Add'
         } );
     } );
@@ -94,7 +99,9 @@ $(document).ready(function() {
   //if(editor.modifier().attr("id")==data.DT_RowId){
      $.getScript('/kindeditor/kindeditor-min.js', function() {
             KindEditor.basePath = '/kindeditor/';
-            editor1 =KindEditor.create('textarea');
+            //editor1 =KindEditor.create('textarea');
+            editor1 = KindEditor.create("#DTE_Field_content");
+            editor2 = KindEditor.create("#DTE_Field_content_zy");
             //editor1.sync();
             //alert($("textarea").val());
           });
@@ -107,7 +114,9 @@ $(document).ready(function() {
       //alert("er");
       
    //if(editor.modifier().attr("id")==data.DT_RowId){
-      editor1.sync();
+    editor1.sync();
+    editor2.sync();
+    
   //    alert("33");
       console.log("Eee");
       //editor.fields("DTE_Field_content_zy").html(editor1.html());
@@ -130,7 +139,11 @@ $(document).ready(function() {
         "data": "title"
       },
       {
-        "data": "content_zy"
+        "data": "content_zy",
+        "render": function ( data, type, full, meta ) {
+          //return data.substr( 0, 38 );
+          return data;
+        }
       },
       {
                 "data": "null",
