@@ -1,6 +1,6 @@
 ﻿<%@ CODEPAGE=65001 %>
 
-<!--#include file="../../fiveinc/function.asp"-->
+<!--#include file="../../inc/function.asp"-->
 
 <% Response.CodePage=65001 %>
 <% Response.Charset="UTF-8" %>

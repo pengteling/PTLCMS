@@ -47,9 +47,39 @@ next
 			end if
 		next
 	elseif data("action") ="create" then
+	sqlstr=""
+		for each key in data
+			
+			if key<>"action" then
+				if sqlstr="" then
+				sqlstr = key&":'"&data(key)&"'"
+				else
+				sqlstr = sqlstr & ","&key&":'"&data(key)&"'"
+				end if
+			end if
+
+		next
+		'response.write sqlstr
+		result =Easp.Db.Ins(tablename,""&sqlstr&"")
+
+
+		%>
+{"data":
+<%
+id = clng(request("id"))
+'Set rs = Easp.Db.Query("Select "&columns&" from "&tablename&" where id="&id)
+'Easp.Print Easp.Encode(rs)
+'Easp.Db.Close(rs)
+'response.write "Select 'row_'&id as DT_RowId, "&columns&" from "&tablename&" where id="&id
+QueryToJSON(conn, "Select 'row_'+convert(varchar(20),id) as DT_RowId, "&columns&" from "&tablename&" where id=(select @@Identity) ").Flush
+'where id="&id'
+%>
+}
+		<%
+		response.end()
 
 	elseif data("action")="remove" then
-
+		result =Easp.Db.Del(tablename,"id="&rowid)
 	end if
 
 
@@ -62,7 +92,7 @@ id = clng(request("id"))
 'Easp.Print Easp.Encode(rs)
 'Easp.Db.Close(rs)
 'response.write "Select 'row_'&id as DT_RowId, "&columns&" from "&tablename&" where id="&id
-QueryToJSON(conn, "Select 'row_'+convert(varchar(20),id) as DT_RowId, "&columns&" from "&tablename&" ").Flush
+QueryToJSON(conn, "Select 'row_'+convert(varchar(20),id) as DT_RowId, "&columns&" from "&tablename&" order by elite desc,px desc,posttime desc,id desc").Flush
 'where id="&id'
 %>
 }

@@ -29,6 +29,49 @@ div.DTE_Body div.DTE_Body_Content div.DTE_Field>div.DTE_Field_Input {
 }
 </style>
 <script>
+/*函数 多图片上传展示处理*/
+function SetDropDownPic(url){
+  $("#DTE_Field_uploadfiles").val($("#DTE_Field_uploadfiles").val() + url +"|");
+  
+  $("#productimages").append("<li><img src='" + url + "' width='120' height='120' /><a href='javascript:DelArray("+(($("#DTE_Field_uploadfiles").val()).split("|").length -2).toString()+")'>删除</a></li>");
+}
+
+function ShowPics(){
+  var ImgUrl,ImgList;
+  ImgList="";
+  ImgUrl=$("#DTE_Field_uploadfiles").val();
+  ImgUrlArray=ImgUrl.split("|");
+
+  if(ImgUrlArray.length<=1){
+  //document.write('您没有上传图片');
+
+  }
+  for(i=0;i<ImgUrlArray.length-1;i++){
+  ImgList=ImgList+"<li><img src='" + ImgUrlArray[i] + "' width='120' height='120' /><a href='javascript:DelArray("+i+")'>删除</a></li>"
+  }
+  $("#productimages").html(ImgList);
+}
+function DelArray(n)
+{
+  
+  if(confirm("确定要删除该图片？删除后点击下面【确认修改】才会生效！")){
+  ImgList="";
+  var arraylist="";
+  ImgUrl=$("#DTE_Field_uploadfiles").val();
+  ImgUrlArray=ImgUrl.split("|");
+  for(i=0;i<ImgUrlArray.length-1;i++){
+    if (i!=n){
+ImgList=ImgList+"<li><img src='" + ImgUrlArray[i] + "' width='120' height='120' /><a href='javascript:DelArray("+(i>n?i-1:i)+")'>删除</a></li>";
+arraylist=arraylist+ImgUrlArray[i]+"|";
+    }
+}
+$("#DTE_Field_uploadfiles").val(arraylist);
+$("#productimages").html(ImgList);
+  }
+  }
+
+</script>
+<script>
 /*
  * Editor client script for DB table news
  * Created by http://editor.datatables.net/generator
@@ -42,10 +85,22 @@ $(document).ready(function() {
     ajax: 'getdatajson.asp',
     table: '#news',
     fields: [
+
       {
         "label": "标题",
         "name": "title"
-      },
+      }, {
+                "label": "图片:",
+                "name": "defaultpicurl",
+                "type": "text"                
+                
+            },
+            {
+                "label": "大图片:",
+                "name": "uploadfiles",
+                "type": "text"                
+                
+            },
       {
         "label": "摘要",
         "name": "content_zy",
@@ -97,13 +152,70 @@ $(document).ready(function() {
     //editor.hide('Field_Name_1');
     //alert($("#DTE_Field_content_zy").val());
   //if(editor.modifier().attr("id")==data.DT_RowId){
+
      $.getScript('/kindeditor/kindeditor-min.js', function() {
             KindEditor.basePath = '/kindeditor/';
             //editor1 =KindEditor.create('textarea');
-            editor1 = KindEditor.create("#DTE_Field_content");
-            editor2 = KindEditor.create("#DTE_Field_content_zy");
+            var options ={
+               basePath :'/kindeditor/',
+              allowFileManager : true,  
+              cssPath : '/kindeditor/plugins/code/prettify.css',
+              uploadJson : '/kindeditor/asp/upload_json.asp',
+              fileManagerJson : '/kindeditor/asp/file_manager_json.asp'
+            };
+            editor1 = KindEditor.create("#DTE_Field_content",options);
+            //editor2 = KindEditor.create("#DTE_Field_content_zy",options);
             //editor1.sync();
             //alert($("textarea").val());
+                          //增加上传按钮
+              if($('#image3').length<=0){
+                          $("<input type='button' value='上传图片' id='image3'>").insertAfter("#DTE_Field_defaultpicurl");
+
+                          $("<input type='button' value='上传多图' id='J_selectImage'>").insertAfter("#DTE_Field_uploadfiles");
+                          $("<ul id='productimages'></ul>").insertAfter("#J_selectImage");
+                          $("#DTE_Field_uploadfiles").hide();
+                          ShowPics();
+
+                          // var editor = KindEditor.editor({
+                          //   basePath :'/kindeditor/',
+                          //   allowFileManager : true,  
+                          //   cssPath : '/kindeditor/plugins/code/prettify.css',
+                          //   uploadJson : '/kindeditor/asp/upload_json.asp',
+                          //   fileManagerJson : '/kindeditor/asp/file_manager_json.asp'
+                          // });
+
+                          $('#image3').click(function() {
+                            editor1.loadPlugin('image', function() {
+                              editor1.plugin.imageDialog({
+                                showRemote : true,
+                                imageUrl : $('#DTE_Field_defaultpicurl').val(),
+                                clickFn : function(url, title, width, height, border, align) {
+                                  $('#DTE_Field_defaultpicurl').val(url);
+                                  editor1.hideDialog();
+                                }
+                              });
+                            });
+                          });
+
+                          $('#J_selectImage').click(function() {
+                        editor1.loadPlugin('multiimage', function() {
+                          editor1.plugin.multiImageDialog({
+                            clickFn : function(urlList) {
+                              //var div = K('#productimages');
+                              //div.html('');          
+                              //$('#DTE_Field_uploadfiles').val(urlList);     
+                              $.each(urlList, function(i, url) {
+                                //div.append('<li><img src="' + url.url + '"></li>');
+                                SetDropDownPic(url.url);
+                              });
+                              editor1.hideDialog();
+                            }
+                          });
+                        });
+                      });
+              }
+              //上传图片插件结束
+
           });
   // }
      
@@ -115,7 +227,7 @@ $(document).ready(function() {
       
    //if(editor.modifier().attr("id")==data.DT_RowId){
     editor1.sync();
-    editor2.sync();
+   // editor2.sync();
     
   //    alert("33");
       console.log("Eee");
@@ -132,9 +244,11 @@ $(document).ready(function() {
     })
 
   var table = $('#news').DataTable( {
-    dom: 'Bfrtip',
+     "order": [[ 3, "desc" ]],
+    // dom: 'Bfrtip',
     ajax: 'getdatajson.asp',
     columns: [
+    {"data":"id"},
       {
         "data": "title"
       },
@@ -145,6 +259,7 @@ $(document).ready(function() {
           return data;
         }
       },
+      {"data":"posttime"},
       {
                 "data": "null",
                 "className": "center",
@@ -194,8 +309,10 @@ $(document).ready(function() {
       <table cellpadding="0" cellspacing="0" border="0" class="display" id="news" width="100%">
         <thead>
           <tr>
+            <th>id</th>
             <th>title</th>
             <th>content</th>
+            <th>时间</th>
             <th>Edit / Delete</th>
           </tr>
         </thead>

@@ -362,4 +362,76 @@ Function SendMail(MailServerAddress,AddRecipient,Subject,Body,Sender,MailFrom)
 		SendMail="OK"
 	end if
 End Function
+
+
+'// 图片处理函数
+function MakeThumb(fileName,saveName,limitW,limitH,nType)
+if not(limitW>0 or limitH>0) then exit function
+Dim ojpg,oh,ow
+Set ojpg = Server.CreateObject("Persits.Jpeg")
+ojpg.open fileName
+oh = ojpg.OriginalHeight
+ow = ojpg.OriginalWidth
+select case nType
+case 0
+    Rem 限定宽高
+    if limitW>0 and limitH>0 then
+      ojpg.width=limitW
+      ojpg.height=limitH
+    end if
+'case 1
+'    Rem 只限定宽度，高度按比例
+'    if limitW>0 then
+'      ojpg.width=limitW
+'      ojpg.height=oh/ow*limitW
+'    end if
+case 1
+    Rem 只限定宽度，高度按比例
+    if limitW>0 and limitW<ojpg.width  then '如果比限定尺寸小 则不压缩宽度了
+      ojpg.width=limitW
+      ojpg.height=oh/ow*limitW
+	else
+		exit function
+    end if
+case 2
+    Rem 只限定高度，宽度按比例
+    if limitH>0 then
+      ojpg.height=limitH
+      ojpg.width=ow/oh*limitH
+    end if
+case 3
+    Rem 按限定的宽高比裁切
+    if limitW>0 and limitH>0 then
+      Dim lheight:lheight=oh*limitW/ow
+      If lheight<limitH Then
+        ojpg.Height = limitH
+        ojpg.Width = ow*ojpg.Height/oh
+      Else
+        ojpg.width = limitW
+        ojpg.Height = oh*ojpg.width/ow
+      End if
+      ojpg.Crop 0, 0,limitW,limitH
+    End If
+case 4
+		ojpg.Quality = 100
+		'If  ojpg.OriginalHeight/limitH *ojpg.OriginalWidth > limitW Then
+				 ojpg.PreserveAspectRatio = True '等比缩放
+				 if ojpg.OriginalWidth/ojpg.OriginalHeight > limitW/limitH then '太扁了，要剪掉左右部分
+				  ojpg.Height = limitH
+				  ojpg.crop CInt((ojpg.Width - limitW)/2),0,CInt((ojpg.Width-limitW)/2)+limitW,limitH
+				 else '太高了，要剪掉上下部分
+				  ojpg.Width = limitW
+				  ojpg.crop 0,CInt((ojpg.Height-limitH)/2),limitW,CInt((ojpg.Height-limitH)/2)+limitH
+				 end if
+		'end if
+case else
+    exit function
+end select
+ojpg.Interpolation =2
+ojpg.Quality = 100
+' 设定锐化效果
+ojpg.Sharpen 1, 120
+ojpg.save saveName
+Set ojpg = nothing
+end function
 %>
