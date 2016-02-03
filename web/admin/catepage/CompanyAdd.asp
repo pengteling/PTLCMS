@@ -1,6 +1,29 @@
-<!--#include file="../../inc/conn.asp"-->
-<!--#include file="../admin.asp"-->
-<!-- #include file="../Inc/Head.asp" -->
+<!--#include virtual="/admin/inc/head.asp"-->
+
+
+<body>
+
+    <div id="wrapper">
+    <!--#include virtual="/admin/inc/top.asp"-->
+
+<!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">添加页面</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+</div>
+                     <!-- /.row -->
+                <div class="row">
+                  <div class="panel panel-default">
+                       <!--  <div class="panel-heading">
+                            Kitchen Sink
+                        </div> -->
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
 <%
 Act=lcase(ChkFormStr(Request("act")))
 ID=strToNum(Request("ID"))
@@ -292,9 +315,7 @@ function CheckForm()
 </script>
 <form id="myform" name="myform" method="post" action="CompanyAdd.asp" onSubmit="return CheckForm();">
   <table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" class="table_southidc">
-    <tr>
-      <td colspan="2" align="center"><a href="companyall.asp"><span class="blod"><%=TT%>项目</span></a></td>
-    </tr>
+    
     <tr>
       <td align="right" class="tr_southidc">所属栏目：</td>
       <td class="tr_southidc"><select name="followid">
@@ -402,7 +423,7 @@ If data(3,i)>1 then class_list=class_list& "├"
 </form>
 <script type="text/javascript">
 <!--
-	if(document.getElementsByName("IsOutLink")[1].checked==true){
+	if(document.getElementsByName("catetype")[0].checked==true){
 		document.getElementById("LinkUrl").style.display='none';
 	}else{
 		document.getElementById("LinkUrl").style.display='';
@@ -413,4 +434,27 @@ If data(3,i)>1 then class_list=class_list& "├"
 set rs=nothing
 set rsClass2=nothing
 %>
-<!-- #include file="../Inc/Foot.asp" -->
+</div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                </div>
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+
+</body>
+</html>

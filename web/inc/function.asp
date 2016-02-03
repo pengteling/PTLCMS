@@ -433,5 +433,82 @@ ojpg.Quality = 100
 ojpg.Sharpen 1, 120
 ojpg.save saveName
 Set ojpg = nothing
+end Function
+
+
+function companyURL(cateid,catetype,outlinkurl,modeltype,catedir,isStatic)
+	if catetype=3 then '外部链接
+		companyURL =outlinkurl	
+	else
+	
+		if isStatic="0" then
+			select case modeltype
+				case 0  '文字信息模型
+					if catetype=1 then					
+						companyURL="news.asp?id="&cateid					
+					else 'catetype=0 or 2 单页或栏目首页
+						companyURL="company.asp?id="&cateid
+					end if			
+				case 1 '图片信息模型
+					'companyURL = "pic.asp?id="&cateid				
+					companyURL = "pic.asp?id="&cateid	
+				case 2 '图文信息模型
+					companyURL="picnews.asp?id="&cateid		
+				case 3 '作家列表模型'	
+					companyURL="writers.asp?id="&cateid
+			end select
+		else '静态			
+			'companyURL =HtmlRoot&catedir&"-cat"&cateid&".html"					
+			companyURL =HtmlRoot&catedir&"/index.html"					
+		end if
+		
+	end if
+
+end function
+
+
+function companyUrl_db(cateid)
+	set rs_cate=server.CreateObject("adodb.recordset")
+	rs_cate.open "Select * from category where cateid="&cateid,conn,1,1
+	if not rs_cate.eof then
+		companyUrl_db =companyURL(cateid,rs_cate("catetype"),rs_cate("outlinkurl"),rs_cate("modeltype"),rs_cate("dirpath"),supporthtml)
+	end if
+	rs_cate.close
+
+
+end Function
+
+function dirpath(cateid)
+
+	set rs_dirpath= server.CreateObject("adodb.recordset")
+	set rs_dirpath2 = server.CreateObject("adodb.recordset")
+	'response.write "select parentid,dirpath from category where cateid="&cateid
+	rs_dirpath.open "select parentid,dirpath from category where cateid="&cateid,conn,1,3
+	if not rs_dirpath.eof then
+		
+		parentid_temp = rs_dirpath("parentid")
+		tempdir =""
+		
+		'response.write "Select catedir from category where cateid in ("&parentid_temp&") order by depth"
+		'response.end 
+		rs_dirpath2.open "Select catedir from category where cateid in ("&parentid_temp&") order by depth",conn,1,1
+		while not rs_dirpath2.eof
+
+			tempdir=tempdir&""&rs_dirpath2(0)&"/"
+			
+		rs_dirpath2.movenext
+		wend
+		rs_dirpath2.close
+		
+		rs_dirpath("dirpath")=tempdir
+		rs_dirpath.update
+		
+	rs_dirpath.movenext
+	end if
+	rs_dirpath.close
+	
+	set rs_dirpath= nothing
+	set rs_dirpath2=  nothing
+
 end function
 %>

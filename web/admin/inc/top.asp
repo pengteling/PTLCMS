@@ -37,12 +37,24 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <%
+<%
+    if session("AdminName")="pengteling" then
+%>            
+ <li>
+    <a href="#"><i class="fa fa-list fa-fw"></i> 网站页面<span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level">   
+     <li> <a href="/admin/catepage/companyadd.asp">添加页面</a></li>
+      <li> <a href="/admin/catepage/companyall.asp">页面管理</a></li>
 
-set rs2=server.CreateObject("adodb.recordset")
-rs.open "Select * from catepage_c where depth=1 "&sql_sonid_page&"  order by orderid",conn,1,1
-while not rs.eof
-%> 
+      </ul>
+      </li>   
+        <%
+        end if
+
+        set rs2=server.CreateObject("adodb.recordset")
+        rs.open "Select * from catepage_c where depth=1 "&sql_sonid_page&"  order by orderid",conn,1,1
+        while not rs.eof
+        %> 
 
 <li>
     <a href="#"><i class="fa fa-list fa-fw"></i> <%=rs("catename")%><span class="fa arrow"></span></a>
@@ -53,7 +65,7 @@ rs2.open "Select * from catepage_c where depth=2 "&sql_sonid_page&" and followid
 while not rs2.eof
 
 %>
- <li> <a href="/admin/<%=rs2("outlinkurl")%>"><%=rs2("catename")%></a></li>
+<li> <a href="/admin/<%=rs2("outlinkurl")%>"><%=rs2("catename")%></a></li>
 <%
 rs2.movenext
 wend

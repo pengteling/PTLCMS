@@ -1,8 +1,31 @@
-<!--#include file="../../inc/conn.asp"-->
-<!--#include file="../admin.asp"-->
-<!-- #include file="../Inc/Head.asp" -->
+<!--#include virtual="/admin/inc/head.asp"-->
+
+
+<body>
+
+    <div id="wrapper">
+    <!--#include virtual="/admin/inc/top.asp"-->
+
+<!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">页面管理</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+</div>
+                     <!-- /.row -->
+                <div class="row">
+                  <div class="panel panel-default">
+                       <!--  <div class="panel-heading">
+                            Kitchen Sink
+                        </div> -->
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
 <style>
-.td_southidc1{BACKGROUND-COLOR: #ECF5FF;}
+.td_southidc1{BACKGROUND-COLOR: #eee;}
 .td_southidc4{BACKGROUND-COLOR: #ffffff;}
 .td_southidc5{BACKGROUND-COLOR: #ffffff;}
 .td_southidc3{BACKGROUND-COLOR: #ffffff;}
@@ -234,4 +257,26 @@ $(function(){
 });
 </script>
 <span class="red" style="font-weight: bold">注:</span> 为了不影响系统正常运行,默认项目请不要删除,如需删除请联系制作者.
-<!-- #include file="../Inc/Foot.asp" -->
+      <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                </div>
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+
+</body>
+</html>

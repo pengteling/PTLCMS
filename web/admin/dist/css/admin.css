@@ -4,3 +4,6 @@ a.navbar-brand{
 	font-weight: bolder;
 
 }
+table.table_southidc tr td{
+	padding: 3px 0;
+}

@@ -92,7 +92,21 @@ id = clng(request("id"))
 'Easp.Print Easp.Encode(rs)
 'Easp.Db.Close(rs)
 'response.write "Select 'row_'&id as DT_RowId, "&columns&" from "&tablename&" where id="&id
-QueryToJSON(conn, "Select 'row_'+convert(varchar(20),id) as DT_RowId, "&columns&" from "&tablename&" order by elite desc,px desc,posttime desc,id desc").Flush
+'QueryToJSON(conn, "Select 'row_'+convert(varchar(20),id) as DT_RowId, "&columns&" from "&tablename&" order by elite desc,px desc,posttime desc,id desc").Flush  //直接调出所有的 适合不用分页量少的数据修改
 'where id="&id'
+
+
+Easp.Db.PageSize = 3
+set rs= Easp.Db.GetRS("Select 'row_'+convert(varchar(20),id)  as DT_RowId, "&columns&" from "&tablename&" order by id desc")
+json = Easp.Encode(rs)
+response.write formatjson(json)
+
+function formatjson(str)
+	start0 =instr(str,"[{")
+	over0 = instr(start0,str,"}]")+2
+	formatjson = mid(str,start0,over0-start0)
+end function
+'response.write setjson(json)
 %>
+
 }

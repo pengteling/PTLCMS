@@ -4,20 +4,13 @@
 <!--#include virtual="/admin/inc/top.asp"-->
 <!--#include virtual="/admin/db/comm.asp"-->
 
-
-<link rel="stylesheet" type="text/css" href="/js/datatables/DataTables-1.10.10/css/jquery.dataTables.min.css"/>
-<link rel="stylesheet" type="text/css" href="/js/datatables/Editor-1.5.4/css/editor.dataTables.min.css"/>
-
-<script type="text/javascript" src="/js/datatables/DataTables-1.10.10/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="/js/datatables/Editor-1.5.4/js/dataTables.editor.min.js"></script>
-
-<!-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.css">
   
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.js"></script>
 
 
 <link rel="stylesheet" type="text/css" href="/js/Editor/css/editor.dataTables.min.css">
-<script type="text/javascript" charset="utf8" src="/js/Editor/js/dataTables.editor.min.js"></script> -->
+<script type="text/javascript" charset="utf8" src="/js/Editor/js/dataTables.editor.min.js"></script>
 <style>
 div.DTED_Lightbox_Wrapper {
     left: 1em;
@@ -89,7 +82,7 @@ var editor1,editor2;
 
 $(document).ready(function() {
   var editor = new $.fn.dataTable.Editor( {
-    ajax: 'getdatajson.asp?page=<%=Easp.var("page")%>',
+    ajax: 'getdatajson.asp',
     table: '#news',
     fields: [
 
@@ -253,27 +246,8 @@ $(document).ready(function() {
   var table = $('#news').DataTable( {
      "order": [[ 3, "desc" ]],
     // dom: 'Bfrtip',
-    ajax: 'getdatajson.asp?page=<%=Easp.var("page")%>',
-    //"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-    columns: [
-    {"data":"id"},
-      {
-        "data": "title"
-      },
-      {
-        "data": "content_zy",
-        "render": function ( data, type, full, meta ) {
-          //return data.substr( 0, 38 );
-          return data;
-        }
-      },
-      {"data":"posttime"},
-      {
-                "data": "null",
-                "className": "center",
-                "defaultContent": '<a href="" class="editor_edit">Edit</a> / <a href="" class="editor_remove">Delete</a>'
-            }
-    ],
+    // ajax: 'getdatajson.asp',
+    
     select: true,
     lengthChange: false,
     buttons: [
@@ -321,17 +295,37 @@ $(document).ready(function() {
             <th>Edit / Delete</th>
           </tr>
         </thead>
-      </table>
-
-      <%
-'对于数量较大的 采用分页调取json数据 getdatajosn.asp 也对应传递当前页码参数 来获取数据'      
+        <tbody>
+          <%
 Easp.Db.PageSize = 3
 Set rs = Easp.Db.GetRS("Select "&columns_data&" from "&tablename&" order by id desc")
 
+'Easp.Print Easp.Encode(rs)
+'Easp.Db.Close(rs)
+while not rs.eof
+response.write "<tr id='row_"&rs("id")&"'>"
+columns_arr = split(columns_data,",")
+for i = 0 to ubound(columns_arr)
+response.write "<td>"&rs(columns_arr(i))&"</td>"
 
+next
+response.write "<td><a href="""" class=""editor_edit"">Edit</a> / <a href="""" class=""editor_remove"">Delete</a></td>"
+response.write "</tr>"
+
+rs.movenext
+wend
+rs.close
+
+
+          %>
+        </tbody>
+      </table>
+
+<%
 response.write Easp.Db.GetPager("bootstrap")
 
 %>
+
 
 
   							</div>

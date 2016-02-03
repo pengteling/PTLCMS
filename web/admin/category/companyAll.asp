@@ -1,20 +1,48 @@
 <!--#include virtual="/admin/inc/head.asp"-->
 
 
+<body>
 
-<%
-dim id,act
-set rs=server.createobject("adodb.recordset")
+    <div id="wrapper">
+    <!--#include virtual="/admin/inc/top.asp"-->
+
+<!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">栏目管理</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+</div>
+                     <!-- /.row -->
+                <div class="row">
+                  <div class="panel panel-default">
+                       <!--  <div class="panel-heading">
+                            Kitchen Sink
+                        </div> -->
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+<style>
+.td_southidc1{BACKGROUND-COLOR: #fff;}
+.td_southidc4{BACKGROUND-COLOR: #ffffff;}
+.td_southidc5{BACKGROUND-COLOR: #ffffff;}
+.td_southidc3{BACKGROUND-COLOR: #ffffff;}
+.td_southidc2{BACKGROUND-COLOR: #ffffff;}
+.td_southidc6{BACKGROUND-COLOR: #ffffff;}
+.td_southidc7{BACKGROUND-COLOR: #ffffff;}
+td b{color:#000000;}
+</style>
+<%set rs=server.createobject("adodb.recordset")
 ID=strToNum(request("ID"))
 Act=ChkFormStr(Request("Act"))
 If Act="del" Then
 	'response.write "由于网站架构删除对网站数据影响很大，如需删除请联系作者"
 	'response.end()
-	Easp.Db.Begin '开始事务
-
-	set rs=Easp.db.sel("Select * From category Where cateID="&ID&"")
+	conn.BeginTrans '事务开始
+	rs.Open"Select * From category Where cateID="&ID,Conn,1,3
 	If Not rs.Eof Then
-	dim followid,parentid,sonid,sonid_p,sonid_arr
 		followid=rs("followid")	
 		parentid=rs("parentid")	
 		sonid=rs("sonid")
@@ -25,10 +53,10 @@ If Act="del" Then
 	rs.Close
 	
 	'response.write "delete from category where cateid in ("&sonid&")"
-	Easp.Db.query ("delete from category where cateid in ("&sonid&")")
-	Easp.Db.query  ("Delete from news where cateid in ("&sonid&")")
+	conn.execute ("delete from category where cateid in ("&sonid&")")
+	conn.execute ("Delete from news where cateid in ("&sonid&")")
 	
-	set rs=Easp.Db.sel( "select cateid,sonid from category where cateid in ("&parentid&") and cateid<>"&ID&" order by depth,orderID")
+	rs.open "select cateid,sonid from category where cateid in ("&parentid&") and cateid<>"&ID&" order by depth,orderID",conn,1,3
 	
 	while not rs.eof 
 		sonid_p = rs("sonid")
@@ -49,72 +77,44 @@ If Act="del" Then
 	rs.close
 	
 	
-	Easp.Db.Commit '提交事务
+	conn.CommitTrans  '如果没有conn错误，则执行事务提交
 
 	Response.Redirect("companyAll.asp")
 	Response.End()
 End IF
 If Act="IsHide" Then
 	s=strToNum(request("s"))
-	Easp.Db.query("Update category Set IsHome="&s&" Where cateID="&ID&"")
+	Conn.Execute("Update category Set IsHome="&s&" Where cateID="&ID&"")
 	Response.Redirect("companyAll.asp")
 	Response.End()
 End If
 If Act="IsOut" Then
-	Easp.Db.query("Update category Set IsOutLink=0 Where cateID="&ID&"")
+	Conn.Execute("Update category Set IsOutLink=0 Where cateID="&ID&"")
 	Response.Redirect("companyAll.asp")
 	Response.End()
 End If
 If Act="IsPage" Then
 	p=strToNum(request("p"))
 	If p=0 Then p=ID
-	Easp.Db.query("Update category Set IsIndex=0 Where cateID="&p&" Or followid="&p&"")
-	Easp.Db.query("Update category Set IsIndex=1 Where cateID="&ID&"")
+	Conn.Execute("Update category Set IsIndex=0 Where cateID="&p&" Or followid="&p&"")
+	Conn.Execute("Update category Set IsIndex=1 Where cateID="&ID&"")
 	set Rs=server.createobject("adodb.recordset")
 	Response.Redirect("companyAll.asp")
 	Response.End()
 End If
 
 %>
-<body>
-
-    <div id="wrapper">
-		<!--#include virtual="/admin/inc/top.asp"-->  
-
-            
-
-        <!-- Page Content -->
-        <div id="page-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">Blank</h1>
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /.row -->
-                <div class="row">
-                	<div class="panel panel-default">
-                        <div class="panel-heading">
-                            Kitchen Sink
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                
-<table class="table table-hover">
-<thead>
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="table_southidc">
   <tr>
-    <th>栏目名</th>
-    <th>属性</th>
-    <th>相关操作</th>    
+    <td width="44%" align="center" class="blod">项目名</td>
+    <td width="14%" align="center" class="blod">属性</td>
+    <td width="27%" align="center" class="blod">相关操作</td>
   </tr>
-</thead>
-  <tbody>
 <%
 
-dim data,class_list,imgno,trclass,tempKG,k,catetype,catetype_str
-set rs =Easp.Db.sel("select cateid,catename,followid,depth,sonid,parentid,orderID,cateType,isHome from category order by depth,orderID")
+
+set rs=server.CreateObject("adodb.recordset")
+			rs.open "select cateid,catename,followid,depth,sonid,parentid,orderID,cateType,isHome from category order by depth,orderID",conn,1,1
 			if not rs.eof then
 				data= rs.getRows()
 			end if
@@ -127,26 +127,31 @@ sub classlist(byval t0)
 		dim i
 		for i=0 to ubound(data,2)
 			if t0=data(2,i) then
-			'If data(3,i)>1 then class_list=class_list& "├"
-		if  data(3,i)=1  then '一级分类 和 有下级栏目的 分类显示 +号图标  or instr(data(4,i),",")>0
+				
+				
+				
+
+'If data(3,i)>1 then class_list=class_list& "├"
+
+if  data(3,i)=1  then '一级分类 和 有下级栏目的 分类显示 +号图标  or instr(data(4,i),",")>0
 					imgno=3
-					'trclass="td_southidc"
+					trclass="td_southidc"
 		else
 					imgno=3		
-					'trclass="td_southidc"		
-		end if
+					trclass="td_southidc"		
+end if
 				trclass="td_southidc" &	data(3,i)	
-				class_list=class_list&"<tr><td>"
+				class_list=class_list&"<tr class="""&trclass&"""><td align=""left"">"
 				tempKG=""
 				For k=2 To data(3,i)
-					class_list=class_list&"&nbsp;&nbsp;&nbsp;&nbsp;"
-					tempKG=tempKG&"&nbsp;&nbsp;&nbsp;&nbsp;"
+				class_list=class_list&"&nbsp;&nbsp;&nbsp;&nbsp;"
+				tempKG=tempKG&"&nbsp;&nbsp;&nbsp;&nbsp;"
 				next
 				
 				
 				
 				class_list=class_list&"<img src=""../Images/tree_folder"&imgno&".gif"" width=""19"" height=""18"" align=""absbottom""><b>"&data(1,i)&"</b> ("&data(6,i)&")</td>"
-				select case data(7,i)
+					select case data(7,i)
 					case 1
 					catetype= "栏目（列表）"
 					 catetype_str="<a href=""companyadd.asp?Act=edit&ID="&data(0,i)&""">修改属性</a> | <a href=""companyadd.asp?followid="&data(0,i)&""">添加下级栏目</a> | <a href=""companyAll.asp?Act=del&ID="&data(0,i)&""" onClick=""return confirm('删除之后,相关内容也会被删除,并且不能恢复!\n\n确定要删除吗？');"">删除</a>"
@@ -159,8 +164,8 @@ sub classlist(byval t0)
 					case 3
 					catetype= "单链接"
 				catetype_str="<a href=""companyadd.asp?Act=edit&ID="&data(0,i)&""">修改属性</a> | <a href=""companyadd.asp?followid="&data(0,i)&""">添加下级栏目</a> | <a href=""companyAll.asp?Act=del&ID="&data(0,i)&""" onClick=""return confirm('删除之后,相关内容也会被删除,并且不能恢复!\n\n确定要删除吗？');"">删除</a>"
-				end select
-				class_list=class_list & "<td>"&catetype&" "
+					end select
+				class_list=class_list & "<td align=""center"" class="""&trclass&""">"&catetype&" "
 				
 				
 					
@@ -172,7 +177,7 @@ sub classlist(byval t0)
 				
 				class_list=class_list &"</td>"
 				
-				class_list=class_list & "<td>"
+				class_list=class_list & "<td align=""left""  class="""&trclass&""" style=""padding-left:25px;"">"
 				
 				class_list=class_list &tempKG&catetype_str
 				
@@ -189,25 +194,10 @@ sub classlist(byval t0)
 response.write class_list		
 
 %>	
-</tbody>
+
 </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                
-            </div>
-            <!-- /.container-fluid -->
-        </div>
-        <!-- /#page-wrapper -->
+<span class="red" style="font-weight: bold">注:</span> 为了不影响系统正常运行,默认项目请不要删除,如需删除请联系制作者.
 
-    </div>
-    <!-- /#wrapper -->
-
-    
 <script type="text/javascript">
 $(function(){
 		
@@ -270,9 +260,28 @@ $(function(){
 	});
 });
 </script>
+
+</div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                </div>
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+
 </body>
-
 </html>
-
-
-
