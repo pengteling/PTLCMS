@@ -1,6 +1,4 @@
-<!--#include file="../../inc/conn.asp"-->
-<!--#include file="../Admin.asp"-->
-<!-- #include file="../Inc/Head.asp" -->
+<!--#include virtual="/admin/inc/head.asp"-->
 <%
 ID=trim(request("ID"))
 

@@ -1,6 +1,7 @@
 <!--#include virtual="/inc/inc.asp" -->
 <!--#include virtual="/admin/admin.asp" -->
 <!--#include virtual="/admin/inc/privilege.asp" -->
+
 <%
 if groupid=2 then
 	'sql_sonid_page = "0"

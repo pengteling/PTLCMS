@@ -25,7 +25,7 @@
                         <div class="panel-body">
                             <div class="table-responsive">
 <style>
-.td_southidc1{BACKGROUND-COLOR: #eee;}
+.td_southidc1{BACKGROUND-COLOR: #eee; }
 .td_southidc4{BACKGROUND-COLOR: #ffffff;}
 .td_southidc5{BACKGROUND-COLOR: #ffffff;}
 .td_southidc3{BACKGROUND-COLOR: #ffffff;}

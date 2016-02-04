@@ -1,5 +1,4 @@
-<!--#include file="../../inc/conn.asp"-->
-<!--#include file="../admin.asp"-->
+<!--#include virtual="/admin/inc/head.asp"-->
 
 <%
 dim ID,Action,sqlDel,rsDel,FoundErr,ErrMsg,ObjInstalled

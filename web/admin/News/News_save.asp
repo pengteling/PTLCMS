@@ -1,7 +1,5 @@
-<!--#include file="../../inc/conn.asp"-->
-<!--#include file="../admin.asp"-->
-<!-- #include file="../Inc/Head.asp" -->
-<!-- #include file="../Inc/ReplaceSaveRemoteFile.asp" -->
+<!--#include virtual="/admin/inc/head.asp"-->
+<!-- #include virtual="/admin/Inc/ReplaceSaveRemoteFile.asp" -->
 <%
 ID=strToNum(Request("ID"))
 title=ChkFormStr(Request("Title"))

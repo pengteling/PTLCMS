@@ -1,6 +1,29 @@
-﻿<!--#include file="../../inc/conn.asp"-->
-<!--#include file="../admin.asp"-->
-<!-- #include file="../Inc/Head.asp" -->
+﻿<!--#include virtual="/admin/inc/head.asp"-->
+
+
+<body>
+
+    <div id="wrapper">
+    <!--#include virtual="/admin/inc/top.asp"-->
+
+<!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">添加信息</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+</div>
+                     <!-- /.row -->
+                <div class="row">
+                  <div class="panel panel-default">
+                       <!--  <div class="panel-heading">
+                            Kitchen Sink
+                        </div> -->
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
 <%
 dim rs
 dim sql
@@ -49,22 +72,21 @@ function SetDropDownPic(url){
 
 <table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" class="table_southidc">
   <form name="myform" method="post" action="News_save.asp" onSubmit="return CheckForm();">
-    <tr>
-      <td height="30" colspan="3" align="center" class="blod">增加信息</td>
-    </tr>
-    <tr bgcolor="#ECF5FF">
+    
+    <tr bgcolor="#ffffff">
       <td height="22" align="center" class="tr_southidc">信息标题：</td>
       <td colspan="2" width="80%"><input name="title" type="text" class="input" size="30">
         
-        颜色：<input name="color" id="color_t" class="input" size="10"/>
+        <!-- 颜色：<input name="color" id="color_t" class="input" size="10"/>
         
-        <img src="../images/color.png" id="pickcolor">
+        <img src="../images/color.png" id="pickcolor"> 
+        <script src="/js/jquery.colorpicker.js"></script>
         <script type="text/javascript">
     $(function(){
         $.showcolor('pickcolor','color_t');//第一参数：按钮ID，第二参数： 文本框ID
        
     })
-</script>
+</script>-->
             </td>
     </tr>
     <tr>
@@ -117,7 +139,7 @@ If data(3,i)>1 then class_list=class_list& "├"
           </tr>
    <!--<input name="Author" type="hidden" id="auther" value="<%=session("AdminName")%>" >     -->  
  
-    <tr bgcolor="#ECF5FF">
+    <tr bgcolor="#ffffff">
       <td height="25" align="center">发 布 人：</td>
       <td colspan="2"><input name="Author" type="text" id="auther" value="<%=session("AdminName")%>" >
        <span class="TableRow1">
@@ -131,7 +153,7 @@ If data(3,i)>1 then class_list=class_list& "├"
         </select>
       </span></td>
     </tr>
-    <tr bgcolor="#ECF5FF">
+    <tr bgcolor="#ffffff">
       <td height="25" align="center">信息来源：</td>
       <td colspan="2"><input name="ComeFrom" type="text" id="ComeFrom" value="网络">
         <span class="TableRow1">
@@ -144,11 +166,11 @@ If data(3,i)>1 then class_list=class_list& "├"
         </select>
       </span></td>
     </tr>
-    <tr bgcolor="#ECF5FF">
+    <tr bgcolor="#ffffff">
       <td height="25" align="center" valign="top">信息摘要：</td>
       <td colspan="2" valign="top"><textarea id="content_zy" name="content_zy" style="width:700px;height:60px;visibility:;"></textarea>限255字</td>
     </tr>
-    <tr bgcolor="#ECF5FF">
+    <tr bgcolor="#ffffff">
       <td height="25" align="center" valign="top">信息内容：</td>
       <td colspan="2" valign="top"> 
             <link rel="stylesheet" href="/kindeditor/themes/default/default.css" />
@@ -214,48 +236,48 @@ If data(3,i)>1 then class_list=class_list& "├"
          </td>
     </tr>
 
-    <tr bgcolor="#ECF5FF">
+    <tr bgcolor="#ffffff">
       <td height="22" align="center" class="tr_southidc">关键词：</td>
       <td colspan="2" width="80%"><input name="keys" type="text" class="input" size="50">用英文逗号,分隔
       </td>
     </tr>
      
     <tr>
-      <td height="30" align="center" bgcolor="#ECF5FF"><span class="tr_southidc">首页图片：</span></td>
-      <td width="301" height="30" bgcolor="#ECF5FF"><span class="tr_southidc">
+      <td height="30" align="center" bgcolor="#ffffff"><span class="tr_southidc">首页图片：</span></td>
+      <td width="301" height="30" bgcolor="#ffffff"><span class="tr_southidc">
         <input name="DefaultPicUrl" type="text" id="DefaultPicUrl" value="" size="30" maxlength="120" />
       </span></td>
-      <td width="495" bgcolor="#ECF5FF"><span class="tr_southidc">
+      <td width="495" bgcolor="#ffffff"><span class="tr_southidc">
        <!-- <input type="button" name="Submit22" value="直接从上传图片中选择" onClick="window.open('../SelectPic.asp','','status=no,scrollbars=yes,top=300,left=200,width=396,height=254');" />-->
         <input name="Submit222" type="button" value="上传图片"   id="image3">
       </span></td>
     </tr>
     <tr>
-      <td height="30" align="center" bgcolor="#ECF5FF"><span class="tr_southidc">是否推荐：</span></td>
-      <td height="30" colspan="2" align="left" bgcolor="#ECF5FF"><input name="Elite" type="checkbox" id="Elite" value="yes">是<font color="#0000FF">（如果选中的话将在首页做为图片信息显示）</font></td>
+      <td height="30" align="center" bgcolor="#ffffff"><span class="tr_southidc">是否推荐：</span></td>
+      <td height="30" colspan="2" align="left" bgcolor="#ffffff"><input name="Elite" type="checkbox" id="Elite" value="yes">是<font color="#0000FF">（如果选中的话将在首页做为图片信息显示）</font></td>
     </tr>
 	<tr>
-      <td height="30" align="center" bgcolor="#ECF5FF">排序：</td>
-      <td height="30" colspan="2" align="left" bgcolor="#ECF5FF"><span class="tr_southidc">
+      <td height="30" align="center" bgcolor="#ffffff">排序：</td>
+      <td height="30" colspan="2" align="left" bgcolor="#ffffff"><span class="tr_southidc">
         <input name="px" type="text" id="px" value="0" size="10" maxlength="5" />
         数字越大越靠前
       </span></td>
     </tr>
     <tr>
-      <td height="30" align="center" bgcolor="#ECF5FF">通过审核：</td>
-      <td height="30" colspan="2" align="left" bgcolor="#ECF5FF"><span class="tr_southidc">
+      <td height="30" align="center" bgcolor="#ffffff">通过审核：</td>
+      <td height="30" colspan="2" align="left" bgcolor="#ffffff"><span class="tr_southidc">
         
         <input name="Passed" type="checkbox" id="Passed" value="yes" checked>是<font color="#0000FF">（如果选中的话将直接发布）</font>
       </span></td>
     </tr>
     <tr>
-      <td height="30" align="center" bgcolor="#ECF5FF"><span class="tr_southidc">发布时间：</span></td>
-      <td height="30" colspan="2" align="left" bgcolor="#ECF5FF"><span class="tr_southidc">
+      <td height="30" align="center" bgcolor="#ffffff"><span class="tr_southidc">发布时间：</span></td>
+      <td height="30" colspan="2" align="left" bgcolor="#ffffff"><span class="tr_southidc">
         <input name="PostTime" type="text" id="PostTime" value="<%=Now()%>" size="30" maxlength="120" />
       </span><font color="#0000FF">（为了避免出错，尽量不要更改。格式：<%=Now()%>）</font></td>
     </tr>
     <tr>
-      <td height="30" colspan="3" align="center" bgcolor="#ECF5FF"><input type="submit" name="Submit" value="确认添加" class="input">
+      <td height="30" colspan="3" align="center" bgcolor="#ffffff"><input type="submit" name="Submit" value="确认添加" class="input">
         
         &nbsp;
         <input type="button" name="Submit2" value="返回上一页" class="input" onClick="history.go(-1);">
@@ -266,4 +288,27 @@ If data(3,i)>1 then class_list=class_list& "├"
     </tr>
   </form>
 </table>
-<!-- #include file="../Inc/Foot.asp" -->
+</div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                </div>
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+
+</body>
+</html>

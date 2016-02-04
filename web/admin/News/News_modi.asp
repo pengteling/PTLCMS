@@ -1,6 +1,29 @@
-<!doctype html><!--#include file="../../inc/conn.asp"-->
-<!--#include file="../admin.asp"-->
-<!-- #include file="../Inc/Head.asp" -->
+<!--#include virtual="/admin/inc/head.asp"-->
+
+
+<body>
+
+    <div id="wrapper">
+    <!--#include virtual="/admin/inc/top.asp"-->
+
+<!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">添加信息</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+</div>
+                     <!-- /.row -->
+                <div class="row">
+                  <div class="panel panel-default">
+                       <!--  <div class="panel-heading">
+                            Kitchen Sink
+                        </div> -->
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
 <style>
 
 #productimages li{
@@ -96,8 +119,8 @@ function SetDropDownPic(url){
 </script> </td>
     </tr>
      <tr>
-      <td  height="22" align="center" bgcolor="#C0C0C0" class="tr_southidc">所属栏目：</td>
-      <td colspan="2" bgcolor="#E3E3E3" class="tr_southidc"><select name="cateid">
+      <td  height="22" align="center" bgcolor="#ECF5FF" class="tr_southidc">所属栏目：</td>
+      <td colspan="2" bgcolor="#ECF5FF" class="tr_southidc"><select name="cateid">
 	  <%
 followid=NewsRs("cateid")
 rs.open "select cateid,catename,followid,depth,sonid,parentid,orderID from category where catetype<=3 order by depth,orderID",conn,1,1
@@ -262,8 +285,8 @@ If data(3,i)>1 then class_list=class_list& "├"
       </span></td>
     </tr>
 	<tr>
-      <td height="22" align="center" bgcolor="#C0C0C0" class="tr_southidc">已有图片：</td>
-	  <td colspan="2" bgcolor="#E3E3E3" class="tr_southidc"><ul id="productimages">
+      <td height="22" align="center" bgcolor="#ECF5FF" class="tr_southidc">已有图片：</td>
+	  <td colspan="2" bgcolor="#ECF5FF" class="tr_southidc"><ul id="productimages">
 <script language="javascript">
 var ImgUrl,ImgList;
 ImgList="";
@@ -313,8 +336,8 @@ document.getElementById("productimages").innerHTML=ImgList;
       </span></td>
     </tr>
       <tr>
-      <td height="30" align="center" bgcolor="#C0C0C0" class="tr_southidc">是否审核：</td>
-      <td colspan="2" bgcolor="#E3E3E3" class="tr_southidc"><input name="Passed" type="checkbox" id="Passed" value="yes" <% if NewsRs("Passed")=true then response.Write("checked") end if%>>
+      <td height="30" align="center" bgcolor="#ECF5FF" class="tr_southidc">是否审核：</td>
+      <td colspan="2" bgcolor="#ECF5FF" class="tr_southidc"><input name="Passed" type="checkbox" id="Passed" value="yes" <% if NewsRs("Passed")=true then response.Write("checked") end if%>>
         是<font color="#0000FF">（如果选中的话将直接发布）</font></td>
     </tr>
     <tr>
@@ -343,4 +366,27 @@ document.getElementById("productimages").innerHTML=ImgList;
     </tr>
   </form>
 </table>
-<!-- #include file="../Inc/Foot.asp" -->
+</div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                </div>
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+
+</body>
+</html>

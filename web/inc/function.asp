@@ -511,4 +511,213 @@ function dirpath(cateid)
 	set rs_dirpath2=  nothing
 
 end function
+
+'该函数作用：按指定参数格式化显示时间。
+'numformat=1:将时间转化为yyyy-mm-dd hh:nn格式。
+'numformat=2:将时间转化为yyyy-mm-dd格式。
+'numformat=3:将时间转化为hh:nn格式。
+'numformat=4:将时间转化为yyyy年mm月dd日 hh时nn分格式。
+'numformat=5:将时间转化为yyyy年mm月dd日格式。
+'numformat=6:将时间转化为hh时nn分格式。
+'numformat=7:将时间转化为yyyy年mm月dd日 星期×格式。
+'numformat=8:将时间转化为yymmdd格式。
+'numformat=9:将时间转化为mmdd格式。
+
+function formatdate(shijian,numformat)
+dim ystr,mstr,dstr,hstr,nstr '变量含义分别为年字符串，月字符串，日字符串，时字符串，分字符串
+
+if isnull(shijian) then
+numformat=0
+else
+ystr=DatePart("yyyy",shijian)
+
+if DatePart("m",shijian)>9 then 
+mstr=DatePart("m",shijian)
+else
+mstr="0"&DatePart("m",shijian) 
+end if
+
+if DatePart("d",shijian)>9 then 
+dstr=DatePart("d",shijian)
+else
+dstr="0"&DatePart("d",shijian) 
+end if
+
+if DatePart("h",shijian)>9 then 
+hstr=DatePart("h",shijian)
+else
+hstr="0"&DatePart("h",shijian) 
+end if
+
+if DatePart("n",shijian)>9 then 
+nstr=DatePart("n",shijian)
+else
+nstr="0"&DatePart("n",shijian) 
+end if
+end if 
+
+select case numformat
+case 0
+formatdate=""
+case 1
+formatdate=ystr&"-"&mstr&"-"&dstr&" "&hstr&":"&nstr 
+case 2
+formatdate=ystr&"-"&mstr&"-"&dstr 
+case 3
+formatdate=hstr&":"&nstr
+case 4
+formatdate=ystr&"年"&mstr&"月"&dstr&"日 "&hstr&"时"&nstr&"分"
+case 5
+formatdate=ystr&"年"&mstr&"月"&dstr&"日" 
+case 6
+formatdate=hstr&"时"&nstr&"分"
+case 7
+formatdate=ystr&"年"&mstr&"月"&dstr&"日 "&WeekdayName(Weekday(shijian))
+case 8
+formatdate=right(ystr,2)&mstr&dstr
+case 9
+formatdate=mstr&"-"&dstr
+end select
+end function
+Public Function UMoney(ByVal money)
+    Dim lnP 
+    Dim Prc 
+    Dim Tmp
+    Dim NoB 
+    Dim Dx 
+    Dim Xx 
+    Dim Zhen 
+    Dim China : China = "分角元拾佰仟万拾佰仟亿"
+    Dim str: str = Array("零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖")
+    Zhen = True
+    money = FormatNumber(money, 2)
+    Prc = CStr(money)
+    Prc = Replace(Prc, ",", "")
+    
+    lnP = Len(Prc)
+    For i = lnP - 1 To 1 Step -1
+        If Mid(Prc, i, 1) = "." Then
+            Select Case lnP - i
+                Case 1
+                    Prc = Replace(Prc, ".", "") + "0"
+                Case 2
+                    Prc = Replace(Prc, ".", "")
+            End Select
+            Zhen = False
+            Exit For
+        End If
+    Next
+    If Zhen Then Prc = Prc + "00"
+    lnP = Len(Prc)
+    For i = 1 To lnP
+        Tmp = str(Mid(Prc, i, 1)) & Tmp
+    Next
+    UMoney = ""
+    fy = 1
+    For i = 1 To lnP
+        Xx = Mid(Tmp, i, 1)
+        Dx = Mid(China, i, 1)
+        
+        If Xx <> "零" Then
+            UMoney = Xx & Dx & UMoney
+            f = 1
+        Else
+            If i = 3 Then
+            UMoney = Dx & UMoney
+            End If
+        
+            If i = 7 Then
+                UMoney = Dx & UMoney
+            End If
+            If f Then
+                UMoney = "零" & UMoney
+            End If
+            f = 0
+        End If
+    Next
+    If Zhen Then UMoney = UMoney + "整"
+    UMoney = Replace(UMoney, "零万", "万")
+    UMoney = Replace(UMoney, "零元", "元")
+End Function
+
+
+'***********************************************
+'过程名：showpage
+'作  用：显示“上一页 下一页”等信息
+'参  数：sfilename  ----链接地址
+'       totalnumber ----总数量
+'       maxperpage  ----每页数量
+'       ShowTotal   ----是否显示总数量
+'       ShowAllPages ---是否用下拉列表显示所有页面以供跳转。有某些页面不能使用，否则会出现JS错误。
+'       strUnit     ----计数单位
+'***********************************************
+sub showpage(sfilename,totalnumber,maxperpage,ShowTotal,ShowAllPages,strUnit)
+	dim n, i,strTemp,strUrl
+	if totalnumber mod maxperpage=0 then
+    	n= totalnumber \ maxperpage
+  	else
+    	n= totalnumber \ maxperpage+1
+  	end if
+  	strTemp= "<table class='top_m_txt01' align='center'><form name='showpages' method='Post' action='" & sfilename & "'><tr><td>"
+	if ShowTotal=true then 
+		strTemp=strTemp & "共 <b>" & totalnumber & "</b> " & strUnit & "&nbsp;&nbsp;"
+	end if
+	strUrl=JoinChar(sfilename)
+  	if CurrentPage<2 then
+    		strTemp=strTemp & "首页 上一页&nbsp;"
+  	else
+    		strTemp=strTemp & "<a href='" & strUrl & "page=1'>首页</a>&nbsp;"
+    		strTemp=strTemp & "<a href='" & strUrl & "page=" & (CurrentPage-1) & "'>上一页</a>&nbsp;"
+  	end if
+
+  	if n-currentpage<1 then
+    		strTemp=strTemp & "下一页 尾页"
+  	else
+    		strTemp=strTemp & "<a href='" & strUrl & "page=" & (CurrentPage+1) & "'>下一页</a>&nbsp;"
+    		strTemp=strTemp & "<a href='" & strUrl & "page=" & n & "'>尾页</a>"
+  	end if
+   	strTemp=strTemp & "&nbsp;页次：<strong><font color=red>" & CurrentPage & "</font>/" & n & "</strong>页 "
+    strTemp=strTemp & "&nbsp;<b>" & maxperpage & "</b>" & strUnit & "/页"
+	if ShowAllPages=True then
+		strTemp=strTemp & "&nbsp;转到：<select name='page' size='1' onchange='javascript:submit()'>"   
+    	for i = 1 to n   
+    		strTemp=strTemp & "<option value='" & i & "'"
+			if cint(CurrentPage)=cint(i) then strTemp=strTemp & " selected "
+			strTemp=strTemp & ">第" & i & "页</option>"   
+	    next
+		strTemp=strTemp & "</select>"
+	end if
+	strTemp=strTemp & "</td></tr></form></table>"
+	response.write strTemp
+end sub
+
+'***********************************************
+'函数名：JoinChar
+'作  用：向地址中加入 ? 或 &
+'参  数：strUrl  ----网址
+'返回值：加了 ? 或 & 的网址
+'pos=InStr(1,"abcdefg","cd") 
+'则pos会返回3表示查找到并且位置为第三个字符开始。
+'这就是“查找”的实现，而“查找下一个”功能的
+'实现就是把当前位置作为起始位置继续查找。
+'***********************************************
+Function JoinChar(strUrl)
+	if strUrl="" then
+		JoinChar=""
+		exit function
+	end if
+	if InStr(strUrl,"?")<len(strUrl) then 
+		if InStr(strUrl,"?")>1 then
+			if InStr(strUrl,"&")<len(strUrl) then 
+				JoinChar=strUrl & "&"
+			else
+				JoinChar=strUrl
+			end if
+		else
+			JoinChar=strUrl & "?"
+		end if
+	else
+		JoinChar=strUrl
+	end if
+End function
 %>

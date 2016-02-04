@@ -1,6 +1,4 @@
-<!--#include file="../../inc/conn.asp"-->
-<!--#include file="../admin.asp"-->
-<!-- #include file="../Inc/Head.asp" -->
+<!--#include virtual="/admin/inc/head.asp"-->
 <%
 dim ID,Action,sqlDel,rsDel,FoundErr,ErrMsg,ObjInstalled
 ID=trim(request("ID"))
