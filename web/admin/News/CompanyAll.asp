@@ -25,16 +25,7 @@
                         <div class="panel-body">
                             <div class="table-responsive">
 
-<style>
-.td_southidc1{BACKGROUND-COLOR: #ECF5FF;}
-.td_southidc4{BACKGROUND-COLOR: #ffffff;}
-.td_southidc5{BACKGROUND-COLOR: #ffffff;}
-.td_southidc3{BACKGROUND-COLOR: #ffffff;}
-.td_southidc2{BACKGROUND-COLOR: #ffffff;}
-.td_southidc6{BACKGROUND-COLOR: #ffffff;}
-.td_southidc7{BACKGROUND-COLOR: #ffffff;}
-td b{color:#000000;}
-</style>
+
 <%set rs=server.createobject("adodb.recordset")
 ID=strToNum(request("ID"))
 Act=ChkFormStr(Request("Act"))

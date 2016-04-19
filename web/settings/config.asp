@@ -1,9 +1,9 @@
 ﻿<%
-Const SiteName="仙纳都"        '网站名称
-Const SiteTitle="仙纳都"        '网站标题
-Const SiteKey="仙纳都"        '网站关键字
+Const SiteName="CMCU"        '网站名称
+Const SiteTitle="CMCU"        '网站标题
+Const SiteKey="CMCU,机三院,CMCU云"        '网站关键字
 Const SiteDescription=""        '网站说明
-Const SiteUrl="http://www.xannad1234.com"        '网站地址
+Const SiteUrl="http://www.cmcu.com"        '网站地址
 Const supportAspjpeg="1"        '支持AspJepg
 Const SiteStatus="1"        '网站状态
 Const SiteInfo="网站暂时关闭，稍候开放！"        '关闭原因

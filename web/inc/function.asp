@@ -720,4 +720,296 @@ Function JoinChar(strUrl)
 		JoinChar=strUrl
 	end if
 End function
+
+
+Function GetFullUrl()
+	Dim ScriptAddress, M_ItemUrl, M_item
+	ScriptAddress = CStr(Request.ServerVariables("SCRIPT_NAME"))&"?"'取得当前地址
+'	so=ChkFormStr(request.form("so"))
+'	if so<>"" then
+'	ScriptAddress=ScriptAddress&"so="&so&"&"
+'	end if
+	If (Request.QueryString <> "") Then
+		M_ItemUrl = ""
+		For Each M_item In Request.QueryString
+			If InStr("page",M_Item)=0 Then
+				M_ItemUrl = M_ItemUrl & M_Item &"="& Server.URLEncode(Request.QueryString(""&M_Item&"")) & "&"
+			End If
+		Next
+		ScriptAddress = ScriptAddress & M_ItemUrl'取得带参数地址
+	End If
+	GetFullUrl = ScriptAddress 
+End Function
+
+
+function replaceUrl(url,cname,cvalue,nvalue)
+dim strtemp
+strtemp=cname&"="&server.URLEncode(cvalue)
+strtemp_new=cname&"="&server.URLEncode(nvalue)
+
+
+if instr(url,strtemp)>0 then
+replaceUrl =replace(url,strtemp,strtemp_new)
+else
+replaceUrl=url&strtemp_new
+end if
+
+end function
+
+function towan(num)
+num = num/1000
+num =int(num + 0.5) /10
+towan= num
+end function
+
+'生成html
+function getHTTPPage(url)
+dim Http
+set Http=server.createobject("MSXML2.serverXMLHTTP")
+Http.open "GET",url,false
+Http.send()
+if Http.readystate<>4 then 
+exit function
+end if
+getHTTPPage=bytesToBSTR(Http.responseBody,"utf-8")
+set http=nothing
+if err.number<>0 then err.Clear 
+end function
+Function BytesToBstr(body,Cset)
+dim objstream
+set objstream = Server.CreateObject("adodb.stream")
+objstream.Type = 1
+objstream.Mode =3
+objstream.Open
+objstream.Write body
+objstream.Position = 0
+objstream.Type = 2
+objstream.Charset = Cset
+BytesToBstr = objstream.ReadText 
+objstream.Close
+set objstream = nothing
+End Function
+
+
+function C_htm(cjurls,path)
+Dim Html
+
+'response.write cjurls
+Html = getHTTPPage(cjurls)
+'response.write Html
+
+set fso=CreateObject("scripting.FileSystemObject")
+'set f=fso.CreateTextFile( server.mappath( "index_c.asp" ), true,true ) '当日净值排序
+
+'f.WriteLine( Html )
+'f.close
+'set f = nothing
+'set fso = Nothing
+
+'response.write path
+strpath = left(path, instrrev(path, "/", -1, 1)) '去掉文件名，得到路径
+'response.write strpath
+If Not fso.FolderExists(Server.mappath(strpath)) Then
+	'fso.CreateFolder(Server.mappath(strpath))
+	'response.write strpath
+	t=CreateMultiFolder(strpath)
+End If
+set fso = Nothing
+
+Set   objStream   =   Server.CreateObject("ADODB.Stream")   
+          With   objStream   
+          .Open   
+          .Charset   =   "utf-8"   
+          .Position   =   objStream.Size   
+          .WriteText=Html   
+          .SaveToFile   server.mappath(path),2     
+          .Close   
+          End   With   
+  Set   objStream   =   Nothing 
+
+'response.write "成功" & "<br>"
+C_htm =true
+
+
+end function
+
+'生成html end
+
+
+
+'创建多级目录，可以创建不存在的根目录 
+'参数：要创建的目录名称，可以是多级 
+'返回逻辑值，True成功，False失败 
+'创建目录的根目录从当前目录开始 
+'--------------------------------------------------- 
+
+Function CreateMultiFolder(ByVal CFolder) 
+    Dim objFSO, PhCreateFolder, CreateFolderArray, CreateFolder 
+    Dim i, ii, CreateFolderSub, PhCreateFolderSub, BlInfo 
+    BlInfo = False 
+    CreateFolder = CFolder 
+    On Error Resume Next 
+    Set objFSO = Server.CreateObject("Scripting.FileSystemObject") 
+    If Err Then 
+        Err.Clear() 
+        Exit Function 
+    End If 
+    CreateFolder = Replace(CreateFolder, "", "/") 
+    If Left(CreateFolder, 1) = "/" Then 
+        CreateFolder = Right(CreateFolder, Len(CreateFolder) -1) 
+    End If 
+    If Right(CreateFolder, 1) = "/" Then 
+        CreateFolder = Left(CreateFolder, Len(CreateFolder) -1) 
+    End If 
+    CreateFolderArray = Split(CreateFolder, "/") 
+    For i = 0 To UBound(CreateFolderArray) 
+        CreateFolderSub = "/"   '这里由空改动成/， 是从根目录开始
+        For ii = 0 To i 
+            CreateFolderSub = CreateFolderSub & CreateFolderArray(ii) & "/" 
+        Next 
+        PhCreateFolderSub = Server.MapPath(CreateFolderSub) 
+        If Not objFSO.FolderExists(PhCreateFolderSub) Then 
+            objFSO.CreateFolder(PhCreateFolderSub) 
+        End If 
+    Next 
+    If Err Then 
+        Err.Clear() 
+    Else 
+        BlInfo = True 
+    End If 
+    CreateMultiFolder = BlInfo 
+End Function 
+
+
+function Thumb_getUrl(filename,width,height)
+'// 参数：需生成文件、限定宽度、限定高度
+
+ 
+if filename="" or cint(width)<10 or cint(height)<10 then 
+ 
+ 	'Thumb_getUrl ="/images/nopic.jpg" '//如果没有需要生成的图片或者祝宽度和高度小于10像素，则用默认图替代
+	'ThumbUrl=Thumb_getUrl(DefaultPicUrl,width,height)
+	ThumbUrl=filename
+else
+
+	
+	fname= ResizePath(filename, width &"x" & height )	
+
+
+
+	 srcfile=Server.MapPath(filename) '//大图路径
+	 destfile=Server.MapPath(fname) '//小图路径
+	 
+	 Set fs = Server.CreateObject("Scripting.FileSystemObject") '//FSO对象，对文件进行判断
+	 If fs.FileExists(destfile) Then '//这里注意了，如果缩略图已经存在，就不需要再生成一次了，直接显示小图
+	 Thumb_getUrl = fname
+	 else '//如果缩略图不存在，则先生成，然后显示
+	call makethumb(srcfile,destfile,width,height,4) '//调用图片处理函数
+	Thumb_getUrl =fname
+	end if
+	set fs=nothing
+end if
+end function
+
+' filepath="profile/"  '//大图保存文件夹
+' savepath="profile/thumbs/" '//大图保存文件夹
+' srcfile=filename  '//处理需要生成的图片文件
+' f=split(filename,".") 
+' destfile=width &"x" & height & "_" & f(0) &"." &f(1) '//缩略图文件名
+' 
+ 'fname=destfile
+
+	
+
+'// 图片处理函数
+function MakeThumb(fileName,saveName,limitW,limitH,nType)
+if not(limitW>0 or limitH>0) then exit function
+Dim ojpg,oh,ow
+Set ojpg = Server.CreateObject("Persits.Jpeg")
+ojpg.open fileName
+oh = ojpg.OriginalHeight
+ow = ojpg.OriginalWidth
+select case nType
+case 0
+    Rem 限定宽高
+    if limitW>0 and limitH>0 then
+      ojpg.width=limitW
+      ojpg.height=limitH
+    end if
+'case 1
+'    Rem 只限定宽度，高度按比例
+'    if limitW>0 then
+'      ojpg.width=limitW
+'      ojpg.height=oh/ow*limitW
+'    end if
+case 1
+    Rem 只限定宽度，高度按比例
+    if limitW>0 and limitW<ojpg.width  then '如果比限定尺寸小 则不压缩宽度了
+      ojpg.width=limitW
+      ojpg.height=oh/ow*limitW
+	else
+		exit function
+    end if
+case 2
+    Rem 只限定高度，宽度按比例
+    if limitH>0 then
+      ojpg.height=limitH
+      ojpg.width=ow/oh*limitH
+    end if
+case 3
+    Rem 按限定的宽高比裁切
+    if limitW>0 and limitH>0 then
+      Dim lheight:lheight=oh*limitW/ow
+      If lheight<limitH Then
+        ojpg.Height = limitH
+        ojpg.Width = ow*ojpg.Height/oh
+      Else
+        ojpg.width = limitW
+        ojpg.Height = oh*ojpg.width/ow
+      End if
+      ojpg.Crop 0, 0,limitW,limitH
+    End If
+case 4
+		ojpg.Quality = 100
+		'If  ojpg.OriginalHeight/limitH *ojpg.OriginalWidth > limitW Then
+				 ojpg.PreserveAspectRatio = True '等比缩放
+				 if ojpg.OriginalWidth/ojpg.OriginalHeight > limitW/limitH then '太扁了，要剪掉左右部分
+				  ojpg.Height = limitH
+				  ojpg.crop CInt((ojpg.Width - limitW)/2),0,CInt((ojpg.Width-limitW)/2)+limitW,limitH
+				 else '太高了，要剪掉上下部分
+				  ojpg.Width = limitW
+				  ojpg.crop 0,CInt((ojpg.Height-limitH)/2),limitW,CInt((ojpg.Height-limitH)/2)+limitH
+				 end if
+		'end if
+case else
+    exit function
+end select
+ojpg.Interpolation =2
+ojpg.Quality = 100
+' 设定锐化效果
+ojpg.Sharpen 1, 120
+ojpg.save saveName
+Set ojpg = nothing
+end function
+
+Function ResizePath(DefaultPicUrl,s)
+	te= InStrRev(DefaultPicUrl,".")	
+	ImageType=Mid(DefaultPicUrl,te,len(DefaultPicUrl)-te+1)
+	ResizePath= Replace(DefaultPicUrl,ImageType,"_"&s&ImageType)
+End function
+'Thumb 生成缩略图函数
+'DefaultPicUrl 源图路径
+'sname 缩略图名称加后缀，缩略图与源图 路径相同，名称后面加一后缀 _sname
+'width height 生成缩略图的尺寸 不等比例则裁剪 
+'函数返回缩略图的地址
+function Thumb(DefaultPicUrl,sname,width,height)
+	url2= ResizePath(DefaultPicUrl,sname)	
+	Set ap=new AspJpeg	
+	ap.MathPathFrom=server.mappath(DefaultPicUrl)	
+	ap.MathPathTo=server.mappath(url2)
+	ap.Width=width
+	ap.Height=height
+	t=ap.image_resize()	
+	Thumb= url2	
+end function
 %>

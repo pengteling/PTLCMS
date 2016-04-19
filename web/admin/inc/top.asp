@@ -22,10 +22,10 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="/admin/manager/Manage_Admin.asp"><i class="fa fa-user fa-fw"></i> 管理员</a>
                         </li>
-                        <li><a href="/admin/siteconfig.asp"><i class="fa fa-gear fa-fw"></i> 网站配置</a>
+                        <li><a href="/admin/config/siteconfig.asp"><i class="fa fa-gear fa-fw"></i> 网站配置</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="/admin/logout.asp"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
+                        <li><a href="/admin/loginout.asp"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
