@@ -9,7 +9,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">添加信息</h1>
+                        <h1 class="page-header">网站配置</h1>
                     </div>
                     <!-- /.col-lg-12 -->
 </div>
@@ -202,7 +202,6 @@ Function WriteToUTF(content,sFilen)'content为替换后的字符串,filename为�
 End Function  
 
 sub SaveConfig()
-
 	If ObjInstalled=false Then
 		FoundErr=True
 		ErrMsg=ErrMsg & "<br><li>你的服务器不支持 FSO(Scripting.FileSystemObject)! </li>"

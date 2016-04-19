@@ -1,40 +1,28 @@
-<!--#include file="../inc/conn.asp"-->
-<!--#include file="Admin.asp"-->
-<HTML>
-<HEAD>
-<TITLE><%=SiteName%></TITLE>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
-<style type="text/css">
-<!--
-.style1 {
-	color: #FFFFFF;
-	font-weight: bold;
-}
-body,html {
-	background-color: #FFFFFF;
-	overflow:auto;
-	overflow-x:hidden;
-	SCROLLBAR-FACE-COLOR: #6a84ae;
-	SCROLLBAR-HIGHLIGHT-COLOR: #aaaaff;
-	SCROLLBAR-SHADOW-COLOR: #335997;
-	SCROLLBAR-3DLIGHT-COLOR: #335997;
-	SCROLLBAR-ARROW-COLOR: #ffffff;
-	SCROLLBAR-TRACK-COLOR: #335997;
-	SCROLLBAR-DARKSHADOW-COLOR: black;
-}
--->
-</style>
-</HEAD>
-<style>
-a{text-decoration: none;} /* ,underline */ 
-a:link {color: #000000;} /*  */
-a:visited {color: #000000;} /*  */
-a:hover{color: #FF0000;} /*  */ 
-a:active {color: #FF0000;} /*  */
-/*BodyCSS*/
-td	{font-size: 12px; color: #000000; text-decoration:none ; text-decoration:none ; }
-</style>
-<BODY LEFTMARGIN=0 TOPMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0 scroll=yes oncontextmenu="javascript:return false;">
+<!--#include virtual="/admin/inc/head.asp"-->
+<body>
+
+    <div id="wrapper">
+    <!--#include virtual="/admin/inc/top.asp"-->
+
+<!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">网站信息</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+</div>
+                     <!-- /.row -->
+                <div class="row">
+                  <div class="panel panel-default">
+                       <!--  <div class="panel-heading">
+                            Kitchen Sink
+                        </div> -->
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+
 <table width="700" border="0" align="center" cellpadding="0" cellspacing="0" style="padding:4px 0 10px 0;">
   <tr>
     <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -230,7 +218,27 @@ response.Write(vOs)
       </table></td>
   </tr>
 </table>
-</BODY>
-</HTML>
-<%'Request.ServerVariables("Http_Host")&Request.ServerVariables("path_info")%>
-<%call connclose()%>
+</div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                </div>
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+
+</body>
+</html>
