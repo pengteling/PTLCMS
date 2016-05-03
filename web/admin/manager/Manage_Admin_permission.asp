@@ -1,7 +1,28 @@
-<!--#include file="../../inc/conn.asp"-->
-<!--#include file="../admin.asp"-->
+<!--#include virtual="/admin/inc/head.asp"-->
+<body>
+
+    <div id="wrapper">
+    <!--#include virtual="/admin/inc/top.asp"-->
+
+<!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">栏目权限设置</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+</div>
+                     <!-- /.row -->
+                <div class="row">
+                  <div class="panel panel-default">
+                       <!--  <div class="panel-heading">
+                            Kitchen Sink
+                        </div> -->
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
 <!--#include file="../Inc/md5.asp"-->
-<!-- #include file="../Inc/Head.asp" -->
 <!-- #include file="../Inc/bit.asp" -->
 <%
 set rs=server.createobject("adodb.recordset")
@@ -281,3 +302,27 @@ $("#inputlist input[name=sonid]").click(function(){
         </tr>
        
 </table>
+</div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                </div>
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+
+</body>
+</html>
