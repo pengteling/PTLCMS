@@ -8,7 +8,7 @@
 
 '固定参数
 app_key="23304958"    '假设
-app_secret="c579429de37db3983d8b5b9e23c906a3"    '假设
+app_secret="c579429de37db3983d8b5b9e23c907a6"    '假设
 format="json"
 time_now =now()
 dim params_arr_sign,params_arr_url
@@ -23,7 +23,7 @@ dim params_arr_sign,params_arr_url
 'sms_template_code 阿里大鱼中的短信模板编号'
 'sms_param 短信模板中需要传的变量 json
 
-call sms("活动验证1","529","13452080657","SMS_5000241","{""code"":""YHX123456"",""product"":""U8记账网""}")
+call sms("大鱼测试","529","15310289823","SMS_6811119","{""code"":""YHX123456"",""customer"":""大鱼测试""}")
 function sms(sms_free_sign_name,extend,rec_num,sms_template_code,sms_param)
 'sms_free_sign_name ="活动验证3"
 'extend ="529"
