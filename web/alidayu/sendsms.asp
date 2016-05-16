@@ -23,7 +23,7 @@ dim params_arr_sign,params_arr_url
 'sms_template_code 阿里大鱼中的短信模板编号'
 'sms_param 短信模板中需要传的变量 json
 
-call sms("大鱼测试","529","15310289823","SMS_6811119","{""code"":""YHX123456"",""customer"":""大鱼测试""}")
+call sms("U8记账网","529","15310289823","SMS_5000238","{""code"":""802123"",""product"":""U8记账网""}")
 function sms(sms_free_sign_name,extend,rec_num,sms_template_code,sms_param)
 'sms_free_sign_name ="活动验证3"
 'extend ="529"
