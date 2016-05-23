@@ -1,5 +1,5 @@
 <%
-news_table="writers"
-cateid_parent_m = 218
-table_name_zh="作家"
+news_table="project"
+cateid_parent_m = 228
+table_name_zh="项目"
 %>

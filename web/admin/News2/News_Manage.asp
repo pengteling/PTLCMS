@@ -1,5 +1,5 @@
 ﻿<!--#include virtual="/admin/inc/head.asp"-->
-
+<!-- #include file="news_config.asp" -->
 
 <body>
 
@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">添加信息</h1>
+                        <h1 class="page-header">信息管理</h1>
                     </div>
                     <!-- /.col-lg-12 -->
 </div>
@@ -24,7 +24,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive">
-<!-- #include file="news_config.asp" -->
+
 <%
 dim strFileName
 const MaxPerPage=18
@@ -234,7 +234,7 @@ end if
             <td width="150">&nbsp; 
               <%
   	if rs.eof and rs.bof then
-		response.write "共找到 0 条信息<br> <a href=""News_add.asp?cateid=" & cateid & """><img src=""../images/addnew.jpg"" width=""78"" height=""22"" border=""0""></a></td></tr></table>"
+		response.write "共找到 0 条信息<br> <a href=""News_add.asp?cateid=" & cateid & """>添加"&table_name_zh&"</a></td></tr></table>"
 	else
     	totalPut=rs.recordcount
 		if currentpage<1 then
