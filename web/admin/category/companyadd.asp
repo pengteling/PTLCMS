@@ -419,10 +419,10 @@ If data(3,i)>1 then class_list=class_list& "├"
       <td align="right" class="tr_southidc">栏目模型： </td>
       <td class="tr_southidc"><select name="modeltype" id="modeltype">
        
-          <option value="0" <%if modeltype=0 then response.write "selected"%>>文字信息列表</option>
-         <option value="1" <%if modeltype=1 then response.write "selected"%>>图片信息列表</option>                 
-          <option value="2" <%if modeltype=2 then response.write "selected"%>>图文信息列表</option>        
-<option value="3" <%if modeltype=3 then response.write "selected"%>>作家信息列表</option>     
+          <option value="0" <%if modeltype=0 then response.write "selected"%>>项目信息列表</option>
+         <option value="1" <%if modeltype=1 then response.write "selected"%>>新闻信息列表</option>                 
+          <option value="2" <%if modeltype=2 then response.write "selected"%>>图片信息列表</option>        
+<option value="3" <%if modeltype=3 then response.write "selected"%>>图文信息列表</option>     
         </select></td>
     </tr>
     <tr id="LinkUrl" <%if catetype<>3 then%>style="display:none;"<%end if%>>

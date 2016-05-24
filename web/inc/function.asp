@@ -445,7 +445,7 @@ function companyURL(cateid,catetype,outlinkurl,modeltype,catedir,isStatic)
 			select case modeltype
 				case 0  '文字信息模型
 					if catetype=1 then					
-						companyURL="news.asp?id="&cateid					
+						companyURL="project.asp?id="&cateid					
 					else 'catetype=0 or 2 单页或栏目首页
 						companyURL="company.asp?id="&cateid
 					end if			
@@ -522,6 +522,8 @@ end function
 'numformat=7:将时间转化为yyyy年mm月dd日 星期×格式。
 'numformat=8:将时间转化为yymmdd格式。
 'numformat=9:将时间转化为mmdd格式。
+'numformat=10:将时间转化为yyyy/mm/dd格式。
+
 
 function formatdate(shijian,numformat)
 dim ystr,mstr,dstr,hstr,nstr '变量含义分别为年字符串，月字符串，日字符串，时字符串，分字符串
@@ -577,6 +579,8 @@ case 8
 formatdate=right(ystr,2)&mstr&dstr
 case 9
 formatdate=mstr&"-"&dstr
+case 10
+formatdate=ystr&"/"&mstr&"/"&dstr 
 end select
 end function
 Public Function UMoney(ByVal money)

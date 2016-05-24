@@ -24,6 +24,7 @@
                         </li>
                         <li><a href="/admin/config/siteconfig.asp"><i class="fa fa-gear fa-fw"></i> 网站配置</a>
                         </li>
+                        <li><a href="/" target="_blank"><i class="fa fa-files-o fa-fw"></i> 预览网站</a></li>
                         <li class="divider"></li>
                         <li><a href="/admin/loginout.asp"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
                         </li>

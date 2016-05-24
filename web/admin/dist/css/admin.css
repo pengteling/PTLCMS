@@ -16,3 +16,10 @@ table.table_southidc tr td{
 .td_southidc6{BACKGROUND-COLOR: #ffffff;}
 .td_southidc7{BACKGROUND-COLOR: #ffffff;}
 td b{color:#000000;}
+#productimages li{
+	list-style:none;
+	float: left;
+	a{
+		display: block;
+	}
+}

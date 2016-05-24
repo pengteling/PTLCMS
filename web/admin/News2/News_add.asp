@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">添加信息</h1>
+                        <h1 class="page-header">添加项目</h1>
                     </div>
                     <!-- /.col-lg-12 -->
 </div>
@@ -46,9 +46,9 @@ function CheckForm()
 	
 	editor1.sync();
 	editor2.sync();
-	editor3.sync();
-	editor4.sync();
-	editor5.sync();
+	// editor3.sync();
+	// editor4.sync();
+	// editor5.sync();
 	if (document.myform.content.value.length == 0){
 		alert("<%=table_name_zh%>内容不能为空！");
 		
@@ -74,7 +74,7 @@ function SetDropDownPic(url){
       <td height="22" align="center" class="tr_southidc"><%=table_name_zh%>名称：</td>
       <td colspan="2" width="80%"><input name="title" type="text" class="input" size="30"></td>
     </tr>
-    <tr>
+    <tr bgcolor="#ECF5FF">
             <td height="22" align="center" class="tr_southidc">所属栏目：</td>
             <td colspan="2" class="tr_southidc"><div align="left">
             
@@ -155,56 +155,66 @@ If data(3,i)>1 then class_list=class_list& "├"
         </select>
       </span></td>
     </tr>-->
-   <tr bgcolor="#ECF5FF">
-      <td width="133" height="25" align="center"><%=table_name_zh%>所属地区：</td>
-      <td colspan="2">
-      <select name="area" id="area"  style="width:100px">>
-      	<!-- <option value="全球">全球</option> -->
-		<option value="大陆">大陆</option>
-		<option value="港台">港台</option>
-		<option value="日韩">日韩</option>
-		<option value="欧美">欧美</option>
-		<option value="印泰">印泰</option>
-		<option value="其它">其它</option>
-      </select>
-		  </td>
-    </tr>  
+
+
+    <tr>
+      <td height="30" align="center" bgcolor="#ECF5FF"><span class="tr_southidc"><%=table_name_zh%>列表图片：</span></td>
+      <td width="301" height="30" bgcolor="#ECF5FF"><span class="tr_southidc">
+        <input name="DefaultPicUrl" type="text" id="DefaultPicUrl" value="" size="30" maxlength="120" />
+      </span></td>
+      <td width="495" bgcolor="#ECF5FF"><span class="tr_southidc">
+       
+        <input name="UploadFiles" type="hidden" id="UploadFiles" value="" />
+        <input name="Submit222" type="button" value="上传图片"   id="image3"><input type="button" id="J_selectImage" value="上传<%=table_name_zh%>大图" />
+      </span></td>
+    </tr>
+    
+    <tr>
+      <td height="22" align="center" bgcolor="#ECF5FF" class="tr_southidc"><%=table_name_zh%>大图：</td>
+	  <td colspan="2" bgcolor="#ECF5FF" class="tr_southidc"><ul id="productimages">
+<script language="javascript">
+var ImgUrl,ImgList;
+ImgList="";
+ImgUrl=myform.UploadFiles.value;
+ImgUrlArray=ImgUrl.split("|");
+
+if(ImgUrlArray.length<=1){
+//document.write('您没有上传图片');
+
+}
+for(i=0;i<ImgUrlArray.length-1;i++){
+ImgList=ImgList+"<li><img src='" + ImgUrlArray[i] + "' width='120' height='120' alt='单击选择图片' style='cursor:hand;' onclick=\"myform.DefaultPicUrl.value='" + ImgUrlArray[i] + "';\"/><a href='javascript:DelArray("+i+")'>删除</a></li>"
+}
+document.write(ImgList);
+
+function DelArray(n)
+{
+	
+	if(confirm("确定要删除该图片？删除后点击下面【确认修改】才会生效！")){
+	ImgList="";
+	var arraylist="";
+	ImgUrl=myform.UploadFiles.value;
+	ImgUrlArray=ImgUrl.split("|");
+	for(i=0;i<ImgUrlArray.length-1;i++){
+		if (i!=n){
+ImgList=ImgList+"<li><img src='" + ImgUrlArray[i] + "' width='120' height='120' alt='单击选择图片' style='cursor:hand;' onclick=\"myform.DefaultPicUrl.value='" + ImgUrlArray[i] + "';\"/><a href='javascript:DelArray("+(i>n?i-1:i)+")'>删除</a></li>";
+arraylist=arraylist+ImgUrlArray[i]+"|";
+		}
+}
+myform.UploadFiles.value=arraylist;
+document.getElementById("productimages").innerHTML=ImgList;
+	}
+	}
+</script></ul>	
+	</td>
+    </tr>
+
+   
 
 <tr bgcolor="#ECF5FF">
-	<td width="133" height="25" align="center"><%=table_name_zh%>写作类别：</td>
-    <td colspan="2">
-    	<!-- <input type="checkbox" name="types" value="玄幻" >玄幻
-    	<input type="checkbox" name="types" value="武侠" >武侠 -->
-    	<select name="types" id="types" multiple="multiple" class="select2" style="width:300px">
-    				<!-- <option value="全部类别">全部类别</option> -->
-					
-                    <option value="玄幻">玄幻</option>
-                    <option value="奇幻">奇幻</option>
-                    <option value="武侠">武侠</option>
-                    <option value="仙侠">仙侠</option>
-                    <option value="都市">都市</option>
-                    <option value="历史">历史</option>
-                    <option value="军事">军事</option>
-                    <option value="灵异">灵异</option>
-                    <option value="科幻">科幻</option>
-                    <option value="悬疑">悬疑</option>
-                    <option value="游戏">游戏</option>
-                    <option value="古言">古言</option>
-                    <option value="青春">青春</option>
-					<option value="其它">其它</option>
-    	</select>
-    </td>     	
-</tr>
-
-<script>
-$(function(){	
-  $(".select2").select2();
-});
-</script>
-<tr bgcolor="#ECF5FF">
-      <td height="22" align="center" class="tr_southidc">加QQ群链接：</td>
+      <td height="22" align="center" class="tr_southidc">视频链接：</td>
       <td colspan="2" width="80%"><input name="qqurl" type="text" class="input" size="30">
-新浪微博ID： <input type="text" name="weibo" class="input" size="20">
+模型链接： <input type="text" name="weibo" class="input" size="20">
       </td>
     </tr>
  <tr bgcolor="#ECF5FF">
@@ -219,7 +229,7 @@ $(function(){
     </td>	
 </tr> -->
     <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top"><%=table_name_zh%>介绍：</td>
+      <td height="25" align="center" valign="top"><%=table_name_zh%>参数：</td>
       <td colspan="2" valign="top"> 
             <link rel="stylesheet" href="/kindeditor/themes/default/default.css" />
 	 <link rel="stylesheet" href="/kindeditor/plugins/code/prettify.css" />
@@ -352,32 +362,13 @@ $(function(){
 
 
      <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top">基本信息：</td>
+      <td height="25" align="center" valign="top">详细内容：</td>
       <td colspan="2" valign="top">  
       <textarea name="content1" id="content1" style="width:700px;height:500px;visibility:hidden;"></textarea>
       </td>
 </tr>    
 
- <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top">人物经历：</td>
-      <td colspan="2" valign="top">  
-      <textarea name="content2" id="content2" style="width:700px;height:500px;visibility:hidden;"></textarea>
-      </td>
-</tr>  
-
- <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top">主要作品：</td>
-      <td colspan="2" valign="top">  
-      <textarea name="content3" id="content3" style="width:700px;height:500px;visibility:hidden;"></textarea>
-      </td>
-</tr>  
-
- <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top">荣誉成就：</td>
-      <td colspan="2" valign="top">  
-      <textarea name="content4" id="content4" style="width:700px;height:500px;visibility:hidden;"></textarea>
-      </td>
-</tr>  
+ 
 
  <tr bgcolor="#ECF5FF">
       <td height="22" align="center" class="tr_southidc">关键词：</td>
@@ -385,66 +376,9 @@ $(function(){
       </td>
       </tr>   
 
- <tr bgcolor="#ECF5FF">
-      <td height="22" align="center" class="tr_southidc">排行榜数据：</td>
-      <td colspan="2" width="80%">
-      日：<input name="perday" type="text" class="input" size="3" value=""> 
-      周：<input name="perweek" type="text" class="input" size="3" value=""> 
-      月：<input name="permonth" type="text" class="input" size="3" value=""> 
-      </td>
-      </tr>
 
-    <tr>
-      <td height="30" align="center" bgcolor="#ECF5FF"><span class="tr_southidc"><%=table_name_zh%>小图：</span></td>
-      <td width="301" height="30" bgcolor="#ECF5FF"><span class="tr_southidc">
-        <input name="DefaultPicUrl" type="text" id="DefaultPicUrl" value="" size="30" maxlength="120" />
-      </span></td>
-      <td width="495" bgcolor="#ECF5FF"><span class="tr_southidc">
-       
-        <input name="UploadFiles" type="hidden" id="UploadFiles" value="" />
-        <input name="Submit222" type="button" value="上传图片"   id="image3"><input type="button" id="J_selectImage" value="上传<%=table_name_zh%>大图" />
-      </span></td>
-    </tr>
+
     
-    <tr>
-      <td height="22" align="center" bgcolor="#C0C0C0" class="tr_southidc"><%=table_name_zh%>大图：</td>
-	  <td colspan="2" bgcolor="#E3E3E3" class="tr_southidc"><ul id="productimages">
-<script language="javascript">
-var ImgUrl,ImgList;
-ImgList="";
-ImgUrl=myform.UploadFiles.value;
-ImgUrlArray=ImgUrl.split("|");
-
-if(ImgUrlArray.length<=1){
-//document.write('您没有上传图片');
-
-}
-for(i=0;i<ImgUrlArray.length-1;i++){
-ImgList=ImgList+"<li><img src='" + ImgUrlArray[i] + "' width='120' height='120' alt='单击选择图片' style='cursor:hand;' onclick=\"myform.DefaultPicUrl.value='" + ImgUrlArray[i] + "';\"/><a href='javascript:DelArray("+i+")'>删除</a></li>"
-}
-document.write(ImgList);
-
-function DelArray(n)
-{
-	
-	if(confirm("确定要删除该图片？删除后点击下面【确认修改】才会生效！")){
-	ImgList="";
-	var arraylist="";
-	ImgUrl=myform.UploadFiles.value;
-	ImgUrlArray=ImgUrl.split("|");
-	for(i=0;i<ImgUrlArray.length-1;i++){
-		if (i!=n){
-ImgList=ImgList+"<li><img src='" + ImgUrlArray[i] + "' width='120' height='120' alt='单击选择图片' style='cursor:hand;' onclick=\"myform.DefaultPicUrl.value='" + ImgUrlArray[i] + "';\"/><a href='javascript:DelArray("+(i>n?i-1:i)+")'>删除</a></li>";
-arraylist=arraylist+ImgUrlArray[i]+"|";
-		}
-}
-myform.UploadFiles.value=arraylist;
-document.getElementById("productimages").innerHTML=ImgList;
-	}
-	}
-</script></ul>	
-	</td>
-    </tr>
     
     <tr>
       <td height="30" align="center" bgcolor="#ECF5FF"><span class="tr_southidc">是否推荐：</span></td>

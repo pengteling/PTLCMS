@@ -57,8 +57,10 @@ if(act="mod") then
 		response.Write("<script>alert('广告类型不能为空！');history.back();</script>")
 		response.End()
 	end if
+	content=trim(Request.Form("content"))
 	if(adType=0) then		
-		content=trim(Request.Form("content"))
+		
+
 		if(isnull(content) or len(content)<1) then
 			response.Write("<script>alert('广告内容不能为空！');history.back();</script>")
 			response.End()
@@ -135,7 +137,7 @@ if(act="mod") then
 	set rs=nothing
 	''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 	response.Write("成功修改广告~!")
-	response.Write("<br><a href=""#"" onClick=""javascript:history.go(-2);"">继续修改-></a>&nbsp;&nbsp;<a href=""ad_add.asp"">添加新广告-></a>")
+	response.Write("<br><a href=""ad_manage.asp"">继续修改-></a>&nbsp;&nbsp;<a href=""ad_add.asp"">添加新广告-></a>")
 else	
 %>
 <FORM method="POST" name="form1" action="ad_mod.asp?act=mod" style="margin:0 0 0 0;">
@@ -205,7 +207,7 @@ Flash</TD>
   <TD align="right" bgcolor="#ECF5FF">链接：</TD>
   <TD align="left" bgcolor="#ECF5FF">
     <input name="linkUrl" type="text" id="linkUrl" size="60" value="<%=adArr(2,0)%>">  </TR>
-<TR bgcolor="#F5F5F5" style="display:none; " id="textContent">
+<TR bgcolor="#F5F5F5" style="display:; " id="textContent">
 	<TD align="right" bgcolor="#ECF5FF">广告内容：</TD>
 	<TD bgcolor="#ECF5FF">		
     
@@ -277,7 +279,7 @@ function chanImg()
 	document.getElementById("objWidth").style.display='';
 	document.getElementById("objHeight").style.display='';
 	document.getElementById("objLink").style.display='';
-	document.getElementById("textContent").style.display='none';
+	//document.getElementById("textContent").style.display='none';
 }
 function chanFlash()
 {
@@ -285,7 +287,7 @@ function chanFlash()
 	document.getElementById("objWidth").style.display='';
 	document.getElementById("objHeight").style.display='';
 	document.getElementById("objLink").style.display='';
-	document.getElementById("textContent").style.display='none';
+	//document.getElementById("textContent").style.display='none';
 }
 <%=chanStr%>
 </script>

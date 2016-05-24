@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">添加信息</h1>
+                        <h1 class="page-header">修改项目</h1>
                     </div>
                     <!-- /.col-lg-12 -->
 </div>
@@ -71,9 +71,9 @@ function CheckForm()
 
 	editor1.sync();
 	editor2.sync();
-	editor3.sync();
-	editor4.sync();
-	editor5.sync();
+	// editor3.sync();
+	// editor4.sync();
+	// editor5.sync();
 	if (document.myform.content.value.length == 0){
 		alert("<%=table_name_zh%>内容不能为空！");
 		
@@ -106,8 +106,8 @@ function SetDropDownPic(url){
 		  </td>
     </tr>
      <tr>
-      <td  height="22" align="center" bgcolor="#C0C0C0" class="tr_southidc">所属类别：</td>
-      <td colspan="2" bgcolor="#E3E3E3" class="tr_southidc"><select name="cateid">
+      <td  height="22" align="center" bgcolor="#ECF5FF" class="tr_southidc">所属类别：</td>
+      <td colspan="2" bgcolor="#ECF5FF" class="tr_southidc"><select name="cateid">
 	  <%
 followid=NewsRs("cateid")
 rs.open "select cateid,catename,followid,depth,sonid,parentid,orderID from category where catetype<=3 order by depth,orderID",conn,1,1
@@ -151,74 +151,16 @@ If data(3,i)>1 then class_list=class_list& "├"
 %>    </select></td>
     </tr>
     
-<tr bgcolor="#ECF5FF">
-      <td width="133" height="25" align="center"><%=table_name_zh%>所属地区：</td>
-      <td colspan="2">
-      <select name="area" id="area"  style="width:100px">>
-      	<!-- <option value="全球">全球</option> -->
-		<option value="大陆">大陆</option>
-		<option value="港台">港台</option>
-		<option value="日韩">日韩</option>
-		<option value="欧美">欧美</option>
-		<option value="印泰">印泰</option>
-		<option value="其它">其它</option>
-      </select>
-		  </td>
-    </tr>  
 
-<tr bgcolor="#ECF5FF">
-	<td width="133" height="25" align="center"><%=table_name_zh%>写作类别：</td>
-    <td colspan="2">
-    	<!-- <input type="checkbox" name="types" value="玄幻" >玄幻
-    	<input type="checkbox" name="types" value="武侠" >武侠 -->
-    	<select name="types" id="types" multiple="multiple" class="select2" style="width:300px">
-    				<!-- <option value="全部类别">全部类别</option> -->
-					 <option value="玄幻">玄幻</option>
-                    <option value="奇幻">奇幻</option>
-                    <option value="武侠">武侠</option>
-                    <option value="仙侠">仙侠</option>
-                    <option value="都市">都市</option>
-                    <option value="历史">历史</option>
-                    <option value="军事">军事</option>
-                    <option value="灵异">灵异</option>
-                    <option value="科幻">科幻</option>
-                    <option value="悬疑">悬疑</option>
-                    <option value="游戏">游戏</option>
-                    <option value="古言">古言</option>
-                    <option value="青春">青春</option>
-					<option value="其它">其它</option>
 
-    	</select>
-    	<script>
-    	$(function(){
-    		
-    		<%
-    		temparr = split(NewsRs("types"),",")
-    		tempstr="["
-    		for i=0 to ubound(temparr)
-    			tempstr=tempstr &"'"& trim(temparr(i))&"',"    			
-    		next
-    		tempstr = left(tempstr,len(tempstr)-1)&"]"
-    		%>
-    		$("#types").val(<%=tempstr%>).trigger("change");;
-    		$("#area").val("<%=NewsRs("area")%>");
-    	})
-    	</script>
-    </td>     	
-</tr>
 
-<script>
-$(function(){	
-  $(".select2").select2();
-});
-</script>
 
     <tr bgcolor="#ECF5FF">
-      <td height="22" align="center" class="tr_southidc">加QQ群链接：</td>
-      <td colspan="2" width="80%"><input name="qqurl" type="text" class="input" size="30" value="<%=NewsRs("qqurl")%>">  新浪微博ID： <input type="text" name="weibo" class="input" size="20" value="<%=NewsRs("weibo")%>"></td>
+      <td height="22" align="center" class="tr_southidc">视频链接：</td>
+      <td colspan="2" width="80%"><input name="qqurl" type="text" class="input" size="30" value="<%=NewsRs("qqurl")%>">  模型链接： <input type="text" name="weibo" class="input" size="20" value="<%=NewsRs("weibo")%>"></td>
     </tr>
 <tr>
-      <td height="30" align="center" bgcolor="#ECF5FF"><span class="tr_southidc"><%=table_name_zh%>小图：</span></td>
+      <td height="30" align="center" bgcolor="#ECF5FF"><span class="tr_southidc"><%=table_name_zh%>列表图片：</span></td>
       <td width="314" height="30" bgcolor="#ECF5FF"><span class="tr_southidc">
         <input name="DefaultPicUrl" type="text" id="DefaultPicUrl" value="<%=DefaultPic%>" size="30" maxlength="120" /> <input name="UploadFiles" type="hidden" id="UploadFiles" value="<%=NewsRs("UploadFiles")%>" />
       </span></td>
@@ -228,8 +170,8 @@ $(function(){
       </span></td>
     </tr> 
  	<tr>
-      <td height="22" align="center" bgcolor="#C0C0C0" class="tr_southidc"><%=table_name_zh%>大图：</td>
-	  <td colspan="2" bgcolor="#E3E3E3" class="tr_southidc"><ul id="productimages">
+      <td height="22" align="center" bgcolor="#ECF5FF" class="tr_southidc"><%=table_name_zh%>大图：</td>
+	  <td colspan="2" bgcolor="#ECF5FF" class="tr_southidc"><ul id="productimages">
 <script language="javascript">
 var ImgUrl,ImgList;
 ImgList="";
@@ -271,7 +213,7 @@ document.getElementById("productimages").innerHTML=ImgList;
       <td colspan="2" valign="top"><textarea id="content_zy" name="content_zy" style="width:700px;height:60px;visibility:;"><%if not isnull(NewsRs("content_zy")) then response.write  htmlspecialchars(NewsRs("content_zy"))%></textarea>限255字</td>
     </tr>     
     <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top"><%=table_name_zh%>内容：</td>
+      <td height="25" align="center" valign="top"><%=table_name_zh%>参数：</td>
       <td colspan="2" valign="top">      
 
 <link rel="stylesheet" href="/kindeditor/themes/default/default.css" />
@@ -321,42 +263,7 @@ document.getElementById("productimages").innerHTML=ImgList;
 			prettyPrint();
 		});
 
-		KindEditor.ready(function(K) {
-			editor3 = K.create('#content2', {
-				cssPath : '/kindeditor/plugins/code/prettify.css',
-				uploadJson : '/kindeditor/asp/upload_json.asp',
-				fileManagerJson : '/kindeditor/asp/file_manager_json.asp',
-				 filterMode : false,
-				allowFileManager : true	
-			});
-			
-			prettyPrint();
-		});
-
-		KindEditor.ready(function(K) {
-			editor4 = K.create('#content3', {
-				cssPath : '/kindeditor/plugins/code/prettify.css',
-				uploadJson : '/kindeditor/asp/upload_json.asp',
-				fileManagerJson : '/kindeditor/asp/file_manager_json.asp',
-				 filterMode : false,
-				allowFileManager : true	
-			});
-			
-			prettyPrint();
-		});
-
-
-		KindEditor.ready(function(K) {
-			editor5 = K.create('#content4', {
-				cssPath : '/kindeditor/plugins/code/prettify.css',
-				uploadJson : '/kindeditor/asp/upload_json.asp',
-				fileManagerJson : '/kindeditor/asp/file_manager_json.asp',
-				 filterMode : false,
-				allowFileManager : true	
-			});
-			
-			prettyPrint();
-		});
+		
 		
 		KindEditor.ready(function(K) {
 				var editor = K.editor({
@@ -402,32 +309,13 @@ document.getElementById("productimages").innerHTML=ImgList;
     </tr>
  
  <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top">基本信息：</td>
+      <td height="25" align="center" valign="top">详细介绍：</td>
       <td colspan="2" valign="top">  
       <textarea name="content1" id="content1" style="width:700px;height:500px;visibility:hidden;"><%if not isnull(NewsRs("content1")) then response.write htmlspecialchars(NewsRs("content1"))%></textarea>
       </td>
 </tr>    
 
- <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top">人物经历：</td>
-      <td colspan="2" valign="top">  
-      <textarea name="content2" id="content2" style="width:700px;height:500px;visibility:hidden;"><%if not isnull(NewsRs("content2")) then response.write htmlspecialchars(NewsRs("content2"))%></textarea>
-      </td>
-</tr>  
 
- <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top">主要作品：</td>
-      <td colspan="2" valign="top">  
-      <textarea name="content3" id="content3" style="width:700px;height:500px;visibility:hidden;"><%if not isnull(NewsRs("content3")) then response.write htmlspecialchars(NewsRs("content3"))%></textarea>
-      </td>
-</tr>  
-
- <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top">荣誉成就：</td>
-      <td colspan="2" valign="top">  
-      <textarea name="content4" id="content4" style="width:700px;height:500px;visibility:hidden;"><%if not isnull(NewsRs("content4")) then response.write htmlspecialchars(NewsRs("content4"))%></textarea>
-      </td>
-</tr>  
 
     <tr bgcolor="#ECF5FF">
       <td height="22" align="center" class="tr_southidc">关键词：</td>
@@ -435,14 +323,7 @@ document.getElementById("productimages").innerHTML=ImgList;
       </td>
       </tr>
 
-      <tr bgcolor="#ECF5FF">
-      <td height="22" align="center" class="tr_southidc">排行榜数据：</td>
-      <td colspan="2" width="80%">
-     日：<input name="perday" type="text" class="input" size="3" value="<%=NewsRs("perday")%>"> 
-      周：<input name="perweek" type="text" class="input" size="3" value="<%=NewsRs("perweek")%>"> 
-      月：<input name="permonth" type="text" class="input" size="3" value="<%=NewsRs("permonth")%>"> 
-      </td>
-      </tr>
+   
       
 
     <tr>
@@ -458,8 +339,8 @@ document.getElementById("productimages").innerHTML=ImgList;
       </span></td>
     </tr>
       <tr>
-      <td height="30" align="center" bgcolor="#C0C0C0" class="tr_southidc">是否审核：</td>
-      <td colspan="2" bgcolor="#E3E3E3" class="tr_southidc"><input name="Passed" type="checkbox" id="Passed" value="yes" <% if NewsRs("Passed")=true then response.Write("checked") end if%>>
+      <td height="30" align="center" bgcolor="#ECF5FF" class="tr_southidc">是否审核：</td>
+      <td colspan="2" bgcolor="#ECF5FF" class="tr_southidc"><input name="Passed" type="checkbox" id="Passed" value="yes" <% if NewsRs("Passed")=true then response.Write("checked") end if%>>
         是<font color="#0000FF">（如果选中的话将直接发布）</font></td>
     </tr>
     <tr>
