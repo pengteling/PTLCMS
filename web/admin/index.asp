@@ -1,1 +1,3 @@
-index.asp
+<%
+response.redirect "index/"
+%>

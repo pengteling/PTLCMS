@@ -22,6 +22,12 @@ cateId_d3 = rs("Cateid")
 sonid_d3 =rs("sonid")
 end if
 
+if k=4 then
+cateId_d4 = rs("Cateid")
+sonid_d4 =rs("sonid")
+end if
+
+
 if cateid=rs("cateid") then
 menustr = menustr &" > <a href="""& companyURL(rs("cateid"),rs("catetype"),rs("outlinkurl"),rs("modeltype"),rs("catedir"),supportHtml)&"""><span class=""red"">"&rs("catename")&"</span></a>"
 else

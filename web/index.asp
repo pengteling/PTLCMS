@@ -42,95 +42,56 @@ cateid_d1 = 0
 
 <div class="i-xm main" id="index-xm">
 	<div class="tabtit">
-		<a href="">建筑工程</a>
-		<a href="">工业工程</a>
-		<a href="">市政工程</a>
-		<a href="">国际工程</a>
-		<a href="">工程建设</a>
-		<a href="">BIM设计</a>
+		
+		<%
+			DIM tabid
+			set rs=Easp.Db.Sel("select * from category where followid=228 order by orderid")
+			while not rs.eof
+				
+				response.write "<a href="""&companyURL(rs("cateid"),rs("catetype"),rs("outlinkurl"),rs("modeltype"),rs("dirpath"),supporthtml)&""">"&rs("catename")&"</a>"
+				
+				
+			rs.MoveNext
+			wend
+			'rs.close
+
+			%>
 	</div>
 	<div class="tabcon">
-		<ul>
-			<li><a href="">
-				<div class="pic"><img src="images/xm-pic-1-big.jpg" alt=""></div>
-				<div class="tit">设计项目名字文字</div>
-				<div class="time-views">
-					<div class="time">2016/03/03</div>
-					<div class="views">1338 次</div>
-				</div>
-				</a>
-			</li>
-			<li><a href="">
-				<div class="pic"><img src="images/xm-pic-1-big.jpg" alt=""></div>
-				<div class="tit">设计项目名字文字</div>
-				<div class="time-views">
-					<div class="time">2016/03/03</div>
-					<div class="views">1338 次</div>
-				</div>
-				</a>
-			</li>
-			<li><a href="">
-				<div class="pic"><img src="images/xm-pic-1-big.jpg" alt=""></div>
-				<div class="tit">设计项目名字文字</div>
-				<div class="time-views">
-					<div class="time">2016/03/03</div>
-					<div class="views">1338 次</div>
-				</div>
-				</a>
-			</li>
-			<li><a href="">
-				<div class="pic"><img src="images/xm-pic-1-big.jpg" alt=""></div>
-				<div class="tit">设计项目名字文字</div>
-				<div class="time-views">
-					<div class="time">2016/03/03</div>
-					<div class="views">1338 次</div>
-				</div>
-				</a>
-			</li>
-			<li><a href="">
-				<div class="pic"><img src="images/xm-pic-1-big.jpg" alt=""></div>
-				<div class="tit">设计项目名字文字</div>
-				<div class="time-views">
-					<div class="time">2016/03/03</div>
-					<div class="views">1338 次</div>
-				</div>
-				</a>
-			</li>
-			<li><a href="">
-				<div class="pic"><img src="images/xm-pic-1-big.jpg" alt=""></div>
-				<div class="tit">设计项目名字文字</div>
-				<div class="time-views">
-					<div class="time">2016/03/03</div>
-					<div class="views">1338 次</div>
-				</div>
-				</a>
-			</li>
-			<li><a href="">
-				<div class="pic"><img src="images/xm-pic-1-big.jpg" alt=""></div>
-				<div class="tit">设计项目名字文字</div>
-				<div class="time-views">
-					<div class="time">2016/03/03</div>
-					<div class="views">1338 次</div>
-				</div>
-				</a>
-			</li>
-			<li><a href="">
-				<div class="pic"><img src="images/xm-pic-1-big.jpg" alt=""></div>
-				<div class="tit">设计项目名字文字</div>
-				<div class="time-views">
-					<div class="time">2016/03/03</div>
-					<div class="views">1338 次</div>
-				</div>
-				</a>
-			</li>
+<%
+rs.movefirst
 
-		</ul>
-		<ul></ul>
-		<ul></ul>
-		<ul></ul>
-		<ul></ul>
-		<ul></ul>
-		<ul></ul>
+while not rs.eof
+	Set NewsListRs = Easp.Db.sel("Select top 12 * from project where isdel=0 and passed=1 and cateid in ( select cateid from category where charindex(',"&rs("cateid")&",',','+parentid+',')>0 ) Order By [px] desc,posttime Desc,[ID] Desc")
+	response.write "<ul>"
+	if not NewsListRs.eof then
+		
+	while not NewsListRs.eof
+%>
+<li><a href="projectitem.asp?id=<%=NewsListRs("id")%>">
+				<div class="pic"><img src="<%=NewsListRs("defaultpicurl")%>" alt=""></div>
+				<div class="tit"><%=NewsListRs("title")%></div>
+				<div class="time-views">
+					<div class="time"><%=formatdate(NewsListRs("posttime"),10)%></div>
+						<div class="views"><%=NewsListRs("hits")%> 次</div>
+				</div>
+				</a>
+			</li>
+<%
+
+	NewsListRs.movenext
+	
+	wend
+	NewsListRs.close
+	
+	end if
+	response.write "</ul>"
+
+rs.movenext
+wend
+rs.close
+%>
+		
 	</div>
 </div>
 
