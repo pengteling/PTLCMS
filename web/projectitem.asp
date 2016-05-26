@@ -92,7 +92,7 @@ curpageTitle= newstitle &"-"&catename&"-"&SiteTitle
 <div class="fmtbox main">
 	<div class="tit"><h3>项目名称：<%=newstitle%></h3></div>
 	<div class="tabtit">
-		<a href="">图片</a>          <a href="">视频</a>          <a href="">模型</a>  
+		<a href="javascript:;">图片</a>          <a href="javascript:;">视频</a>          <a href="javascript:;">模型</a>  
 	</div>
 	<div class="tabbd">
 		<div class="tabcon">
@@ -101,9 +101,11 @@ curpageTitle= newstitle &"-"&catename&"-"&SiteTitle
 					<div class="bd">
 						<ul>
 						<%
+						if isarray(bigimgs) then
 						for i = 0 to ubound(bigimgs)-1
-							response.write "<li><img src="""&bigimgs(i)&"""></li>"
+							response.write "<li><img src="""&bigimgs(i)&""" width=""1170"" height=""616""></li>"
 						next
+						end if
 						%>
 							
 						</ul>
@@ -111,27 +113,29 @@ curpageTitle= newstitle &"-"&catename&"-"&SiteTitle
 					<div class="hd">
 						<ul>
 							<%
+							if isarray(bigimgs) then
 						for i = 0 to ubound(bigimgs)-1
 							response.write "<li><img src="""&bigimgs(i)&"""></li>"
 						next
+						end if
 						%>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="tabcon">
+		<div class="tabcon" style="display: none;position: relative;">
 			<%if qqurl<>"" then%>
-				<iframe width=1170 height=616 src="<%=qqurl%>" frameborder=0 allowfullscreen></iframe>
+				<iframe width=1170 height=790 src="<%=qqurl%>" frameborder=0 allowfullscreen style="position: relative;" ></iframe>
 			<%else%>
 			这里是视频显示区域
 			<%end if%>
 			<!-- <iframe src="http://sina.cn" frameborder="0"></iframe> -->
 		</div>
-		<div class="tabcon">
+		<div class="tabcon" style="display: none;position: relative;">
 			
 		<%if weibo<>"" then%>
-				<iframe width=1170 height=616 src="<%=weibo%>" frameborder=0 allowfullscreen></iframe>
+				<iframe width=1170 height=790 src="<%=weibo%>" frameborder=0 allowfullscreen style="position: relative;" ></iframe>
 			<%else%>
 			这里是模型显示区域
 			<%end if%>

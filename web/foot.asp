@@ -22,15 +22,15 @@
 		<div class="foot-3of4">
 			<div class="subtit">关于我们</div>  
 			<div class="about">
-				<a href="">公司介绍</a>
-				<a href="">企业文化</a>
-				<a href="">产品介绍</a>
-				<a href="">联系我们</a>
+				<a href="http://www.cmtdi.com/Company.asp?id=1" target="_blank">公司介绍</a>
+				<a href="http://www.cmtdi.com/Company.asp?id=48" target="_blank">企业文化</a>
+				<a href="http://www.cmtdi.com/Company.asp?id=36" target="_blank">业务介绍</a>
+				<a href="http://www.cmtdi.com/Company.asp?id=4" target="_blank">联系我们</a>
 			</div>
 			
 		</div>
 		<div class="foot-4of4">
-			<a href="" class="gjlogo">国机集团</a>
+			<a href="http://www.sinomach.com.cn/" target="_blank" class="gjlogo">国机集团</a>
 		</div>
 		
 	</div>

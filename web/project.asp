@@ -27,7 +27,12 @@ rs.close
 %>
 <!--#include virtual="/lmenu.asp"-->
 <%
+if request("so")<>"" then
+Keyword = ChkFormStr(Request("so"))
+curpageTitle= "搜索："&Keyword&"-"&catename&"-"&SiteTitle
+else
 curpageTitle= catename&"-"&SiteTitle
+end if
 %>
 <!--#include virtual="/top.asp"-->
 

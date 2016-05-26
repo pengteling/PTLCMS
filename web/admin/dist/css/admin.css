@@ -6,6 +6,12 @@ a.navbar-brand{
 }
 table.table_southidc tr td{
 	padding: 3px 0;
+	border-bottom: #ddd 1px dashed;
+
+}
+table.table_southidc tr td.blod{
+	font-weight: bolder;
+	font-weight: 16px;
 
 }
 .td_southidc1{BACKGROUND-COLOR: #eee;}

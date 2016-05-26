@@ -9,7 +9,7 @@
 <%
 'Easp.Db.SetConnection "default", "MSSQL", "yugao", "jdb_f:jadeboxadm@JADEBOXSERVER\SQLEXPRESS"
 'connstr="Provider=SQLOLEDB.1;Server=(local);User ID=yugao_f;Password=jadeboxadm;Database=yugao;"
-connstr="Provider=SQLOLEDB.1;Server=JADEBOXSERVER\SQLEXPRESS;User ID=xannad;Password=xannadadm;Database=xannad;"
+connstr="Provider=SQLOLEDB.1;Server=10.209.0.141;User ID=xannad_f;Password=xannadadm;Database=xannad;"
 Set conn = Server.CreateObject("ADODB.Connection")
 	conn.open ConnStr
 ' KindEditor ASP
