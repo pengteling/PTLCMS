@@ -1,7 +1,27 @@
+<!--#include virtual="/admin/inc/head.asp"-->
+<body>
 
-<!--#include file="../../inc/conn.asp"-->
-<!--#include file="../admin.asp"-->
-<!-- #include file="../Inc/Head.asp" -->
+    <div id="wrapper">
+    <!--#include virtual="/admin/inc/top.asp"-->
+
+<!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">广告分类</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+</div>
+                     <!-- /.row -->
+                <div class="row">
+                  <div class="panel panel-default">
+                       <!--  <div class="panel-heading">
+                            Kitchen Sink
+                        </div> -->
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
 <%
 '定义变量
 dim id,tabname,newsUrl,isoutlink
@@ -38,4 +58,28 @@ call closeconn()
   <p class="style1">
   <%response.Write("delete success!")%></p>
 </div>
-<!-- #include file="../Inc/Foot.asp" -->
+
+</div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                </div>
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+
+</body>
+</html>
