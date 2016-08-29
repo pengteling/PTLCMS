@@ -32,7 +32,7 @@ else
 	response.End()
 end if
 set rs=server.createobject("adodb.recordset")
-	sql="select adType,photo,linkUrl,imgW,imgH,catalogId,content,title,moditime from ad where id="&id&" order by id desc "
+	sql="select adType,photo,linkUrl,imgW,imgH,catalogId,content,title,moditime,orderid from ad where id="&id&" order by id desc "
 	rs.open sql,conn,3,1
 	if rs.eof or rs.bof then
 		response.Write("没有找到记录")
@@ -117,6 +117,14 @@ if(act="mod") then
 			response.End()
 		end if
 	end if
+
+	orderid = request.form("orderid")
+	if not isnumeric(orderid) then
+		response.Write("<script>alert('序号必须是阿拉伯数字');history.back();</script>")
+		response.End()
+	else
+		orderid = cint(orderid)
+	end if
 	
 	'Response.write catalogid
 	'''''''''''''''''''''''''''''''''添加到库''''''''''''''''''''''''''''
@@ -132,6 +140,7 @@ if(act="mod") then
 	rs("imgW")=imgW
 	rs("imgH")=imgH
 	rs("moditime")=now
+	rs("orderid")=orderid
 	rs.update
 	rs.close
 	set rs=nothing
@@ -207,6 +216,10 @@ Flash</TD>
   <TD align="right" bgcolor="#ECF5FF">链接：</TD>
   <TD align="left" bgcolor="#ECF5FF">
     <input name="linkUrl" type="text" id="linkUrl" size="60" value="<%=adArr(2,0)%>">  </TR>
+<TR bgcolor="#F5F5F5" id="objOrderid">
+  <TD align="right" bgcolor="#ECF5FF">序号：</TD>
+  <TD align="left" bgcolor="#ECF5FF">
+    <input name="orderid" type="text" id="orderid" size="10" value="<%=adArr(9,0)%>"> * 阿拉伯数字，数字越大排序越靠前 </TR>
 <TR bgcolor="#F5F5F5" style="display:; " id="textContent">
 	<TD align="right" bgcolor="#ECF5FF">广告内容：</TD>
 	<TD bgcolor="#ECF5FF">		

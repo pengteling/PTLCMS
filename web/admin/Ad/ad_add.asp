@@ -97,6 +97,15 @@ if(act="add") then
 		end if
 	end if
 	
+
+	orderid = request.form("orderid")
+	if not isnumeric(orderid) then
+		response.Write("<script>alert('序号必须是阿拉伯数字');history.back();</script>")
+		response.End()
+	else
+		orderid = cint(orderid)
+	end if
+
 	
 	'''''''''''''''''''''''''''''''''添加到库''''''''''''''''''''''''''''
 	set rs=server.createobject("adodb.recordset")
@@ -112,6 +121,7 @@ if(act="add") then
 	rs("imgW")=imgW
 	rs("imgH")=imgH
 	rs("moditime")=now
+	rs("orderid")=orderid
 	rs.update
 	rs.close
 	set rs=nothing
@@ -121,7 +131,7 @@ if(act="add") then
 else
 %>
 <FORM method="POST" name="form1" action="ad_add.asp?act=add" style="margin:0 0 0 0;">
-  <TABLE width="100%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#A4B6D7">
+  <TABLE width="100%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#A4B6D7" class="table_southidc">
 <TR>
   <TD height="22" colspan="2" align="center"><span style="font-weight: bold">添加广告</span></TD>
   </TR>
@@ -187,6 +197,10 @@ Flash</TD>
   <TD align="left" bgcolor="#ECF5FF">
     <input name="linkUrl" type="text" id="linkUrl" size="60">
   </TR>
+  <TR bgcolor="#F5F5F5" id="objOrderid">
+  <TD align="right" bgcolor="#ECF5FF">序号：</TD>
+  <TD align="left" bgcolor="#ECF5FF">
+    <input name="orderid" type="text" id="orderid" size="10" value="0"> * 阿拉伯数字，数字越大排序越靠前 </TR>
 <TR bgcolor="#F5F5F5" style="display:none; " id="textContent">
 	<TD align="right" bgcolor="#ECF5FF">广告内容：</TD>
 	<TD align="left" bgcolor="#ECF5FF">		

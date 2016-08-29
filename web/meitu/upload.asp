@@ -1,4 +1,8 @@
 <%
+
+If request.servervariables("HTTP_REFERER") ="" Then
+	'判断来源
+End if
 Server.ScriptTimeout=3600
 i=Request.TotalBytes
 r=1024*300  '限制文件大小'

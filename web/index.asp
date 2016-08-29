@@ -12,7 +12,7 @@ cateid_d1 = 0
 		<div class="bd">
 			<ul>
 			<%
-			set rs=Easp.Db.Sel("select * from ad where catalogid=2 order by id desc")
+			set rs=Easp.Db.Sel("select * from ad where catalogid=2 order by orderid desc,moditime desc,id desc")
 			while not rs.eof
 			%>
 				<li><img src="<%=rs("photo")%>"/>
