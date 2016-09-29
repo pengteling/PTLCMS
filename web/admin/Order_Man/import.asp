@@ -46,11 +46,7 @@ rs.open "select * from orderlist_c where addtime>='"&date1&"' and addtime<='"&da
                 <td > 
                   收货人</td>
                 <td > 
-                  联系电话</td>
-                
-               
-                
-               
+                  联系电话</td>               
               </tr>
               <%
 if not rs.eof then
